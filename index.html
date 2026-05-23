@@ -41,6 +41,8 @@ a{color:inherit;text-decoration:none}
 @keyframes badge-pulse{0%,100%{box-shadow:0 0 8px var(--green-xa)}50%{box-shadow:0 0 20px var(--green-xa)}}
 @keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
 @keyframes open-portal{0%{transform:scale(0);opacity:0}60%{transform:scale(1.1);opacity:1}100%{transform:scale(1)}}
+@keyframes lightning-flash{0%,100%{opacity:0;transform:scaleY(1)}2%{opacity:1}4%{opacity:0}5%{opacity:.8}7%{opacity:0}}
+@keyframes lightning-glow{0%,100%{opacity:0}2%,5%{opacity:1;box-shadow:0 0 60px var(--neon-red),0 0 120px rgba(196,30,58,.6)}7%{opacity:0}}
 @keyframes typewriter{from{width:0}to{width:100%}}
 
 /* ============ SPLASH ============ */
@@ -54,7 +56,7 @@ a{color:inherit;text-decoration:none}
 .portal-ring1{position:absolute;inset:-16px;border-radius:50%;border:2px solid rgba(196,30,58,.7);border-top-color:transparent;animation:portal-rotate 6s linear infinite}
 .portal-ring2{position:absolute;inset:-30px;border-radius:50%;border:1px solid rgba(79,195,247,.35);border-bottom-color:transparent;animation:portal-rotate 10s linear infinite reverse}
 .portal-ring3{position:absolute;inset:-48px;border-radius:50%;border:1px solid rgba(123,47,214,.3);border-left-color:transparent;animation:portal-rotate 16s linear infinite}
-.portal-logo{position:absolute;z-index:3;width:140px;height:140px;object-fit:contain;filter:drop-shadow(0 0 20px var(--red)) drop-shadow(0 0 40px rgba(196,30,58,.4))}
+.portal-logo{position:absolute;z-index:3;top:50%;left:50%;transform:translate(-50%,-50%);width:180px;height:180px;object-fit:contain;filter:drop-shadow(0 0 24px var(--red)) drop-shadow(0 0 50px rgba(196,30,58,.5))}
 .splash-alert{font-family:'Special Elite',cursive;color:var(--neon-red);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:14px;opacity:.8}
 .splash-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:900;text-align:center;color:#fff;text-shadow:0 0 30px var(--red),0 0 60px rgba(196,30,58,.5);line-height:1.2;margin-bottom:8px}
 .splash-sub{font-family:'Special Elite',cursive;font-size:.9rem;color:var(--blue);letter-spacing:.2em;text-transform:uppercase;margin-bottom:36px;opacity:.8}
@@ -112,6 +114,11 @@ section{padding:90px 40px;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(123,47,214,.15) 0%,rgba(196,30,58,.08) 40%,var(--black) 70%)}
 .hero-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.008) 2px,rgba(255,255,255,.008) 4px)}
 #hero-particles{position:absolute;inset:0;pointer-events:none}
+/* LIGHTNING */
+.lightning-container{position:absolute;inset:0;pointer-events:none;z-index:1}
+.lightning-bolt{position:absolute;top:0;width:3px;background:linear-gradient(to bottom,rgba(255,20,66,0),var(--neon-red) 30%,#ff6688 60%,rgba(255,20,66,0));border-radius:2px;opacity:0;transform-origin:top center}
+.lightning-bolt::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60px;height:100%;background:radial-gradient(ellipse,rgba(255,20,66,.15),transparent 70%);border-radius:50%;filter:blur(8px)}
+.lightning-glow{position:absolute;inset:0;background:rgba(196,30,58,.04);opacity:0;pointer-events:none}
 .hero-badge{font-family:'Special Elite',cursive;font-size:.65rem;color:var(--neon-red);letter-spacing:.35em;text-transform:uppercase;margin-bottom:20px;border:1px solid rgba(196,30,58,.4);display:inline-block;padding:6px 16px}
 .hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,8vw,6rem);font-weight:900;color:#fff;line-height:1;margin-bottom:16px;text-shadow:0 0 60px rgba(196,30,58,.6)}
 .hero-year{font-family:'Special Elite',cursive;font-size:clamp(1rem,3vw,1.6rem);color:var(--neon-red);letter-spacing:.5em;text-transform:uppercase;margin-bottom:12px;animation:flicker 8s infinite}
@@ -352,6 +359,10 @@ footer{padding:48px 40px;text-align:center;border-top:1px solid var(--border)}
 <section id="hero">
   <div class="hero-bg"></div>
   <div id="hero-particles"></div>
+  <!-- Rayos rojos -->
+  <div class="lightning-container" id="lightning-container">
+    <div class="lightning-glow" id="lightning-glow"></div>
+  </div>
   <div style="position:relative;z-index:2;text-align:center">
     <p class="hero-badge reveal">HAWKINS · INDIANA · OCTUBRE 31</p>
     <div class="hero-year reveal">EDICIÓN 2026</div>
@@ -595,30 +606,15 @@ let _musicStarted = false;
 function startMusic(){
   if(_musicStarted) return;
   _musicStarted = true;
-  // Crear iframe oculto — se crea DENTRO del gesto del usuario para permitir autoplay
+  // Crear iframe oculto — se activa automáticamente con el click de INGRESAR
   const yt = document.createElement('iframe');
   yt.id = 'yt-music';
-  // Running Up That Hill - Kate Bush (video oficial)
   yt.src = 'https://www.youtube.com/embed/NSXA-prVotU?autoplay=1&loop=1&playlist=NSXA-prVotU&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&start=0';
   yt.allow = 'autoplay; encrypted-media';
   yt.setAttribute('allowfullscreen', '');
   yt.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:-1px;left:-1px;border:none';
   document.body.appendChild(yt);
-
-  // Botón de control de música (mute/unmute)
-  const btn = document.createElement('button');
-  btn.id = 'music-btn';
-  btn.innerHTML = '🎵';
-  btn.title = 'Running Up That Hill — Kate Bush';
-  btn.style.cssText = 'position:fixed;bottom:96px;right:28px;z-index:900;width:46px;height:46px;border-radius:50%;background:rgba(196,30,58,.15);border:1px solid rgba(196,30,58,.4);color:#fff;font-size:1.1rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px)';
-  let muted = false;
-  btn.onclick = () => {
-    muted = !muted;
-    yt.src = yt.src.replace(/&mute=\d/,'') + (muted ? '&mute=1' : '');
-    btn.innerHTML = muted ? '🔇' : '🎵';
-    btn.style.opacity = muted ? '.5' : '1';
-  };
-  document.body.appendChild(btn);
+  // Sin botón de música — se activa solo con INGRESAR
 }
 
 // ======= SPLASH =======
@@ -647,6 +643,89 @@ for(let i=0;i<35;i++){
   el.style.cssText=`position:absolute;width:${size}px;height:${size}px;border-radius:50%;background:rgba(${isRed?'196,30,58':'79,195,247'},.4);left:${Math.random()*100}%;animation:float-spore ${Math.random()*18+12}s ${Math.random()*15}s linear infinite;pointer-events:none`;
   hp.appendChild(el);
 }
+
+// ======= LIGHTNING BOLTS + THUNDER =======
+function makeLightningPath(){
+  // Genera un rayo SVG en zigzag
+  const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  const h = 250 + Math.random()*250;
+  const w = 40;
+  svg.setAttribute('width', w);
+  svg.setAttribute('height', h);
+  svg.style.cssText = 'position:absolute;top:0;overflow:visible;pointer-events:none';
+  let d = `M${w/2} 0`;
+  let y = 0;
+  while(y < h){
+    const step = 20 + Math.random()*30;
+    y += step;
+    const x = Math.random()*w;
+    d += ` L${x} ${y}`;
+  }
+  const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+  path.setAttribute('d', d);
+  path.setAttribute('stroke', '#ff1442');
+  path.setAttribute('stroke-width', 2 + Math.random()*2);
+  path.setAttribute('fill', 'none');
+  path.setAttribute('filter', 'url(#glow)');
+  // glow filter
+  const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+  const filter = document.createElementNS('http://www.w3.org/2000/svg','filter');
+  filter.setAttribute('id','glow');
+  const blur = document.createElementNS('http://www.w3.org/2000/svg','feGaussianBlur');
+  blur.setAttribute('stdDeviation','4'); blur.setAttribute('result','coloredBlur');
+  const merge = document.createElementNS('http://www.w3.org/2000/svg','feMerge');
+  ['coloredBlur','SourceGraphic'].forEach(n=>{ const mn=document.createElementNS('http://www.w3.org/2000/svg','feMergeNode'); mn.setAttribute('in',n); merge.appendChild(mn); });
+  filter.appendChild(blur); filter.appendChild(merge); defs.appendChild(filter);
+  svg.appendChild(defs); svg.appendChild(path);
+  return svg;
+}
+
+function thunderSound(){
+  if(!_musicStarted) return; // solo si ya entraron al sitio
+  try{
+    const ac = new (window.AudioContext||window.webkitAudioContext)();
+    const buf = ac.createBuffer(1, ac.sampleRate*1.5, ac.sampleRate);
+    const d = buf.getChannelData(0);
+    for(let i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.max(0,1-i/(ac.sampleRate*.4))*0.3;
+    const src = ac.createBufferSource();
+    const g = ac.createGain();
+    g.gain.setValueAtTime(0.5,0);
+    g.gain.linearRampToValueAtTime(0,1.5);
+    src.buffer=buf; src.connect(g); g.connect(ac.destination);
+    src.start();
+  }catch(e){}
+}
+
+function spawnLightning(){
+  const lc = document.getElementById('lightning-container');
+  const glow = document.getElementById('lightning-glow');
+  const count = 1 + Math.floor(Math.random()*2);
+  for(let i=0;i<count;i++){
+    const bolt = makeLightningPath();
+    bolt.style.left = (5 + Math.random()*90) + '%';
+    bolt.style.top = '0';
+    bolt.style.opacity = '0';
+    lc.appendChild(bolt);
+    // Flash animation
+    bolt.style.transition = 'opacity .05s';
+    bolt.style.opacity = '1';
+    if(glow){
+      glow.style.transition='opacity .05s';
+      glow.style.opacity='1';
+    }
+    setTimeout(()=>{ bolt.style.opacity='0'; if(glow) glow.style.opacity='0'; },80);
+    setTimeout(()=>{
+      bolt.style.opacity='.7';
+      if(glow) glow.style.opacity='.8';
+    },130);
+    setTimeout(()=>{ bolt.style.opacity='0'; if(glow) glow.style.opacity='0'; bolt.remove(); },200);
+  }
+  thunderSound();
+  // Programar próximo rayo (aleatorio entre 3-10 segundos)
+  setTimeout(spawnLightning, 3000 + Math.random()*7000);
+}
+// Iniciar rayos en hero después de un delay inicial
+setTimeout(spawnLightning, 2000);
 
 // ======= HAMBURGER =======
 function toggleMenu(){
