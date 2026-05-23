@@ -10,78 +10,70 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@900&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --red:#c41e3a;--neon-red:#ff1442;--blue:#4fc3f7;--black:#020005;
-  --text-dim:rgba(255,255,255,.45);
-}
+:root{--red:#c41e3a;--neon-red:#ff1442;--blue:#4fc3f7;--black:#020005}
 html,body{height:100%;background:var(--black);color:#fff;overflow:hidden;font-family:'Special Elite',cursive}
 
-/* ── PARTÍCULAS ── */
+/* EFECTOS DE FONDO */
 #particles{position:fixed;inset:0;pointer-events:none;z-index:0}
-
-/* ── SCAN LINE ── */
 .scanline{position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.006) 2px,rgba(255,255,255,.006) 4px);pointer-events:none;z-index:1}
-
-/* ── VIGNETTE ── */
-.vignette{position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.85) 100%);pointer-events:none;z-index:1}
-
-/* ── CONTENIDO PRINCIPAL ── */
-.center{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
-
-/* ── LOGO ── */
-.logo-wrap{position:relative;margin-bottom:28px}
-.logo-wrap img{width:clamp(140px,30vw,220px);height:auto;filter:drop-shadow(0 0 30px rgba(255,20,66,.6)) drop-shadow(0 0 60px rgba(196,30,58,.3));animation:float 4s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-
-/* ── CLASSIFIED ── */
-.classified-tag{font-size:.6rem;letter-spacing:.4em;color:var(--neon-red);text-transform:uppercase;border:1px solid rgba(196,30,58,.4);padding:5px 16px;margin-bottom:16px;display:inline-block;animation:flicker 6s infinite}
-@keyframes flicker{0%,94%,96%,98%,100%{opacity:1}95%,97%,99%{opacity:.2}}
-
-/* ── TÍTULO ── */
-.main-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,8vw,5.5rem);font-weight:900;line-height:1;text-shadow:0 0 40px rgba(196,30,58,.5);margin-bottom:6px;position:relative}
-.main-title::before,.main-title::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%}
-.main-title::before{color:var(--neon-red);animation:glitch1 7s infinite;clip-path:polygon(0 0,100% 0,100% 45%,0 45%);opacity:.6}
-.main-title::after{color:var(--blue);animation:glitch2 7s infinite .2s;clip-path:polygon(0 55%,100% 55%,100% 100%,0 100%);opacity:.4}
-@keyframes glitch1{0%,90%,100%{transform:translate(0)}92%{transform:translate(-3px,1px)}94%{transform:translate(3px,-1px)}}
-@keyframes glitch2{0%,90%,100%{transform:translate(0)}92%{transform:translate(3px,1px)}94%{transform:translate(-3px,-1px)}}
-
-.sub-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1rem,4vw,2.2rem);font-weight:900;color:var(--neon-red);letter-spacing:.05em;margin-bottom:6px;text-shadow:0 0 20px rgba(255,20,66,.4)}
-
-.edition{font-family:'Special Elite',cursive;font-size:.85rem;color:var(--blue);letter-spacing:.4em;text-transform:uppercase;margin-bottom:40px;opacity:.8}
-
-/* ── COUNTDOWN ── */
-.countdown-wrap{margin-bottom:36px}
-.countdown-label{font-size:.6rem;letter-spacing:.35em;color:var(--text-dim);text-transform:uppercase;margin-bottom:14px}
-.countdown{display:flex;gap:clamp(10px,3vw,28px);justify-content:center;align-items:flex-end}
-.cd-block{display:flex;flex-direction:column;align-items:center;gap:6px}
-.cd-num{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,7vw,4rem);font-weight:900;color:#fff;text-shadow:0 0 30px var(--neon-red);min-width:2ch;text-align:center;line-height:1}
-.cd-sep{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,7vw,3.5rem);color:var(--neon-red);opacity:.5;padding-bottom:20px;animation:blink 1s infinite}
-@keyframes blink{0%,100%{opacity:.5}50%{opacity:.1}}
-.cd-label{font-size:.55rem;letter-spacing:.25em;color:var(--text-dim);text-transform:uppercase}
-
-/* ── DIVIDER ── */
-.divider{width:clamp(200px,50vw,400px);height:1px;background:linear-gradient(to right,transparent,var(--red),transparent);margin:0 auto 28px}
-
-/* ── MENSAJE ── */
-.message{max-width:520px;margin:0 auto 32px;font-size:clamp(.8rem,2vw,.95rem);color:rgba(255,255,255,.6);line-height:1.8;letter-spacing:.04em}
-.message strong{color:var(--neon-red);font-style:normal}
-
-/* ── BOTÓN WHATSAPP ── */
-.wa-link{display:inline-flex;align-items:center;gap:10px;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.4);color:#25d366;font-family:'Special Elite',cursive;font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;padding:14px 28px;transition:all .3s}
-.wa-link:hover{background:rgba(37,211,102,.25);box-shadow:0 0 20px rgba(37,211,102,.3)}
-.wa-link svg{width:20px;height:20px;fill:#25d366;flex-shrink:0}
-
-/* ── FOOTER ── */
-.cs-footer{position:fixed;bottom:20px;left:0;right:0;text-align:center;font-size:.6rem;letter-spacing:.25em;color:rgba(255,255,255,.15);text-transform:uppercase;z-index:2}
-
-/* ── RAYOS ── */
+.vignette{position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.9) 100%);pointer-events:none;z-index:1}
 #lightning{position:fixed;inset:0;pointer-events:none;z-index:1}
 #lglow{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,20,66,.15),transparent 70%);opacity:0;pointer-events:none;transition:opacity .15s}
 
-/* ── RESPONSIVE ── */
+/* CENTRO */
+.center{position:relative;z-index:2;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;gap:0}
+
+/* LOGO */
+.logo-img{width:clamp(120px,22vw,200px);height:auto;
+  filter:drop-shadow(0 0 30px rgba(255,20,66,.7)) drop-shadow(0 0 70px rgba(196,30,58,.4));
+  animation:float 4s ease-in-out infinite;
+  margin-bottom:clamp(16px,3vh,28px)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* BADGE CLASIFICADO */
+.classified{font-size:clamp(.5rem,.9vw,.65rem);letter-spacing:.35em;color:var(--neon-red);
+  text-transform:uppercase;border:1px solid rgba(196,30,58,.45);
+  padding:5px 18px;display:inline-block;
+  animation:flicker 7s infinite;margin-bottom:clamp(18px,3.5vh,32px)}
+@keyframes flicker{0%,93%,96%,99%,100%{opacity:1}94%,97%{opacity:.15}}
+
+/* TÍTULO GRANDE */
+.main-title{font-family:'Cinzel Decorative',serif;
+  font-size:clamp(3rem,11vw,9rem);
+  font-weight:900;line-height:.95;
+  position:relative;display:inline-block;
+  margin-bottom:4px}
+/* glitch rojo/azul */
+.main-title::before,.main-title::after{
+  content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%}
+.main-title::before{color:var(--neon-red);animation:g1 6s infinite;
+  clip-path:polygon(0 0,100% 0,100% 45%,0 45%);opacity:.55;mix-blend-mode:screen}
+.main-title::after{color:var(--blue);animation:g2 6s infinite .15s;
+  clip-path:polygon(0 55%,100% 55%,100% 100%,0 100%);opacity:.45;mix-blend-mode:screen}
+@keyframes g1{0%,88%,100%{transform:translate(0)}90%{transform:translate(-4px,1px)}93%{transform:translate(4px,-1px)}}
+@keyframes g2{0%,88%,100%{transform:translate(0)}90%{transform:translate(4px,1px)}93%{transform:translate(-4px,-1px)}}
+
+.sub-title{font-family:'Cinzel Decorative',serif;
+  font-size:clamp(2rem,7vw,6rem);
+  font-weight:900;color:var(--neon-red);
+  text-shadow:0 0 30px rgba(255,20,66,.5);
+  margin-bottom:clamp(14px,2.5vh,24px);line-height:1}
+
+.edition{font-family:'Special Elite',cursive;
+  font-size:clamp(.65rem,1.3vw,.9rem);
+  color:rgba(255,255,255,.5);
+  letter-spacing:.35em;text-transform:uppercase}
+
+/* FOOTER */
+.cs-footer{position:fixed;bottom:18px;left:0;right:0;text-align:center;
+  font-size:.55rem;letter-spacing:.2em;color:rgba(255,255,255,.12);
+  text-transform:uppercase;z-index:2}
+.cs-footer span{color:rgba(196,30,58,.35)}
+
+/* MOBILE */
 @media(max-width:480px){
-  .countdown{gap:8px}
-  .cd-sep{font-size:1.8rem}
+  .main-title{font-size:clamp(2.5rem,15vw,4rem)}
+  .sub-title{font-size:clamp(1.8rem,11vw,3rem)}
 }
 </style>
 </head>
@@ -93,125 +85,68 @@ html,body{height:100%;background:var(--black);color:#fff;overflow:hidden;font-fa
 <div id="lightning"><div id="lglow"></div></div>
 
 <div class="center">
-
-  <!-- LOGO -->
-  <div class="logo-wrap">
-    <img src="logo-st.png" alt="Fiesta de Disfraces 2026">
-  </div>
-
-  <div class="classified-tag">⚠ ACCESO CLASIFICADO — HAWKINS LAB ⚠</div>
-
+  <img class="logo-img" src="logo-st.png" alt="Fiesta de Disfraces 2026">
+  <div class="classified">⚠ Acceso Clasificado — Hawkins Lab ⚠</div>
   <div class="main-title" data-text="FIESTA DE">FIESTA DE</div>
   <div class="sub-title">DISFRACES</div>
-  <div class="edition">2026 · Hawkins Edition · Edición N° 10</div>
-
-  <div class="countdown-wrap">
-    <div class="countdown-label">— El portal se abre en —</div>
-    <div class="countdown">
-      <div class="cd-block"><span class="cd-num" id="cd-d">00</span><span class="cd-label">Días</span></div>
-      <div class="cd-sep">:</div>
-      <div class="cd-block"><span class="cd-num" id="cd-h">00</span><span class="cd-label">Horas</span></div>
-      <div class="cd-sep">:</div>
-      <div class="cd-block"><span class="cd-num" id="cd-m">00</span><span class="cd-label">Min</span></div>
-      <div class="cd-sep">:</div>
-      <div class="cd-block"><span class="cd-num" id="cd-s">00</span><span class="cd-label">Seg</span></div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <p class="message">
-    Algo se está gestando en los túneles de<br>
-    <strong>Santiago del Estero.</strong><br>
-    La 10ª edición de la Fiesta de Disfraces más grande del norte argentino<br>
-    está por llegar. Registrate para recibir info exclusiva antes del lanzamiento.
-  </p>
-
-  <a class="wa-link" href="https://api.whatsapp.com/send?phone=543855789996&text=Hola%20%F0%9F%98%80!%20Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20Fiesta%20de%20Disfraces%202026..." target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    Quiero info exclusiva
-  </a>
-
+  <div class="edition">2026 &middot; Hawkins Edition &middot; Edición N° 10</div>
 </div>
 
-<div class="cs-footer">Fiesta de Disfraces 2026 · Santiago del Estero · Desarrollado por <span style="color:rgba(196,30,58,.5)">Fusión IA - Fuego Creativo</span></div>
+<div class="cs-footer">Fiesta de Disfraces 2026 · Santiago del Estero · Desarrollado por <span>Fusión IA - Fuego Creativo</span></div>
 
 <script>
-// ── COUNTDOWN ──
-const TARGET = new Date('2026-10-31T22:00:00-03:00');
-function pad(n){ return String(n).padStart(2,'0'); }
-function tick(){
-  const now = new Date();
-  let diff = Math.max(0, TARGET - now);
-  const d = Math.floor(diff / 864e5); diff -= d*864e5;
-  const h = Math.floor(diff / 36e5);  diff -= h*36e5;
-  const m = Math.floor(diff / 6e4);   diff -= m*6e4;
-  const s = Math.floor(diff / 1e3);
-  document.getElementById('cd-d').textContent = pad(d);
-  document.getElementById('cd-h').textContent = pad(h);
-  document.getElementById('cd-m').textContent = pad(m);
-  document.getElementById('cd-s').textContent = pad(s);
-}
-tick(); setInterval(tick, 1000);
-
-// ── PARTÍCULAS ──
-const pc = document.getElementById('particles');
-for(let i=0;i<50;i++){
-  const el = document.createElement('div');
-  const sz = Math.random()*3+1;
-  const isRed = Math.random()>.55;
-  el.style.cssText = `position:absolute;border-radius:50%;
-    width:${sz}px;height:${sz}px;
-    background:rgba(${isRed?'255,20,66':'79,195,247'},.35);
-    left:${Math.random()*100}%;
-    top:${Math.random()*100}%;
-    animation:sp ${10+Math.random()*20}s ${Math.random()*10}s linear infinite`;
+// PARTÍCULAS
+const pc=document.getElementById('particles');
+for(let i=0;i<55;i++){
+  const el=document.createElement('div');
+  const sz=Math.random()*3+1;
+  const isRed=Math.random()>.5;
+  el.style.cssText=`position:absolute;border-radius:50%;width:${sz}px;height:${sz}px;background:rgba(${isRed?'255,20,66':'79,195,247'},.3);left:${Math.random()*100}%;top:${Math.random()*100}%;animation:sp ${12+Math.random()*20}s ${Math.random()*12}s linear infinite`;
   pc.appendChild(el);
 }
-const ks = document.createElement('style');
-ks.textContent = '@keyframes sp{0%{transform:translateY(0) scale(1);opacity:.35}50%{opacity:.7}100%{transform:translateY(-120vh) scale(0);opacity:0}}';
+const ks=document.createElement('style');
+ks.textContent='@keyframes sp{0%{transform:translateY(0) scale(1);opacity:.3}50%{opacity:.65}100%{transform:translateY(-120vh) scale(0);opacity:0}}';
 document.head.appendChild(ks);
 
-// ── LIGHTNING ──
+// RAYOS
 function makeBolt(){
-  const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-  const h = 400+Math.random()*400, w = 80;
-  svg.setAttribute('width',w); svg.setAttribute('height',h);
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  const h=400+Math.random()*400,w=80;
+  svg.setAttribute('width',w);svg.setAttribute('height',h);
   svg.style.cssText='position:absolute;top:0;overflow:visible;pointer-events:none';
   let d=`M${w/2} 0`,y=0;
-  while(y<h){ const step=30+Math.random()*50; y+=step; d+=` L${10+Math.random()*(w-20)} ${y}`; }
+  while(y<h){const step=30+Math.random()*50;y+=step;d+=` L${10+Math.random()*(w-20)} ${y}`;}
   const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
   const f=document.createElementNS('http://www.w3.org/2000/svg','filter');
-  f.setAttribute('id','bg'); f.setAttribute('x','-200%'); f.setAttribute('y','-20%');
-  f.setAttribute('width','500%'); f.setAttribute('height','140%');
+  f.setAttribute('id','bg');f.setAttribute('x','-200%');f.setAttribute('y','-20%');f.setAttribute('width','500%');f.setAttribute('height','140%');
   const bl=document.createElementNS('http://www.w3.org/2000/svg','feGaussianBlur');
-  bl.setAttribute('stdDeviation','10'); bl.setAttribute('result','cb');
+  bl.setAttribute('stdDeviation','10');bl.setAttribute('result','cb');
   const mg=document.createElementNS('http://www.w3.org/2000/svg','feMerge');
-  ['cb','cb','SourceGraphic'].forEach(n=>{ const mn=document.createElementNS('http://www.w3.org/2000/svg','feMergeNode'); mn.setAttribute('in',n); mg.appendChild(mn); });
-  f.appendChild(bl); f.appendChild(mg); defs.appendChild(f);
+  ['cb','cb','SourceGraphic'].forEach(n=>{const mn=document.createElementNS('http://www.w3.org/2000/svg','feMergeNode');mn.setAttribute('in',n);mg.appendChild(mn);});
+  f.appendChild(bl);f.appendChild(mg);defs.appendChild(f);
   const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-  p.setAttribute('d',d); p.setAttribute('stroke','#ff1442'); p.setAttribute('stroke-width',3+Math.random()*4);
-  p.setAttribute('fill','none'); p.setAttribute('filter','url(#bg)'); p.setAttribute('stroke-linecap','round');
+  p.setAttribute('d',d);p.setAttribute('stroke','#ff1442');p.setAttribute('stroke-width',3+Math.random()*4);
+  p.setAttribute('fill','none');p.setAttribute('filter','url(#bg)');p.setAttribute('stroke-linecap','round');
   const c=document.createElementNS('http://www.w3.org/2000/svg','path');
-  c.setAttribute('d',d); c.setAttribute('stroke','rgba(255,200,200,.9)'); c.setAttribute('stroke-width','1.5');
-  c.setAttribute('fill','none'); c.setAttribute('stroke-linecap','round');
-  svg.appendChild(defs); svg.appendChild(p); svg.appendChild(c);
+  c.setAttribute('d',d);c.setAttribute('stroke','rgba(255,200,200,.9)');c.setAttribute('stroke-width','1.5');
+  c.setAttribute('fill','none');c.setAttribute('stroke-linecap','round');
+  svg.appendChild(defs);svg.appendChild(p);svg.appendChild(c);
   return svg;
 }
 function spawnBolt(){
   const lc=document.getElementById('lightning');
   const glow=document.getElementById('lglow');
   const bolt=makeBolt();
-  bolt.style.left=(3+Math.random()*88)+'%'; bolt.style.top='0'; bolt.style.opacity='0';
+  bolt.style.left=(3+Math.random()*88)+'%';bolt.style.top='0';bolt.style.opacity='0';
   lc.appendChild(bolt);
-  setTimeout(()=>{ bolt.style.transition='opacity .12s ease-in'; bolt.style.opacity='1'; if(glow){glow.style.transition='opacity .12s';glow.style.opacity='1';} },10);
-  setTimeout(()=>{ bolt.style.transition='opacity .08s'; bolt.style.opacity='.2'; if(glow) glow.style.opacity='.2'; },180);
-  setTimeout(()=>{ bolt.style.transition='opacity .10s'; bolt.style.opacity='.95'; if(glow){glow.style.transition='opacity .10s';glow.style.opacity='.9';} },280);
-  setTimeout(()=>{ bolt.style.transition='opacity .4s ease-out'; bolt.style.opacity='0'; if(glow){glow.style.transition='opacity .4s';glow.style.opacity='0';} },450);
+  setTimeout(()=>{bolt.style.transition='opacity .12s ease-in';bolt.style.opacity='1';if(glow){glow.style.transition='opacity .12s';glow.style.opacity='1';}},10);
+  setTimeout(()=>{bolt.style.transition='opacity .08s';bolt.style.opacity='.2';if(glow)glow.style.opacity='.2';},180);
+  setTimeout(()=>{bolt.style.transition='opacity .10s';bolt.style.opacity='.95';if(glow){glow.style.transition='opacity .10s';glow.style.opacity='.9';}},280);
+  setTimeout(()=>{bolt.style.transition='opacity .4s ease-out';bolt.style.opacity='0';if(glow){glow.style.transition='opacity .4s';glow.style.opacity='0';}},450);
   setTimeout(()=>bolt.remove(),900);
-  setTimeout(spawnBolt, 5000+Math.random()*9000);
+  setTimeout(spawnBolt,5000+Math.random()*9000);
 }
-setTimeout(spawnBolt, 2000);
+setTimeout(spawnBolt,2000);
 </script>
 </body>
 </html>
