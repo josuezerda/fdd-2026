@@ -165,6 +165,23 @@ nav{position:fixed;top:0;width:100%;z-index:100;padding:12px 40px;display:flex;a
 .modal-wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--green-wa);color:#fff;padding:16px 36px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;transition:all .3s;margin:0 auto}
 .modal-wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(37,211,102,.4)}
 
+/* ============ GALERÍA ============ */
+#galeria{padding:80px 40px;text-align:center}
+.galeria-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;max-width:1200px;margin:48px auto 0}
+.galeria-item{position:relative;overflow:hidden;border-radius:16px;aspect-ratio:4/3;cursor:pointer;border:1px solid var(--border)}
+.galeria-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .4s ease;filter:brightness(.85)}
+.galeria-item:hover img{transform:scale(1.07);filter:brightness(1)}
+.galeria-item::after{content:'🔍';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2rem;opacity:0;background:rgba(255,107,0,.15);transition:opacity .3s;border-radius:16px}
+.galeria-item:hover::after{opacity:1}
+/* Lightbox */
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px}
+#lightbox.open{display:flex}
+#lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;object-fit:contain;box-shadow:0 0 60px rgba(255,107,0,.3)}
+#lightbox-close{position:fixed;top:20px;right:24px;font-size:2rem;color:#fff;cursor:pointer;line-height:1;background:rgba(0,0,0,.5);border:none;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+#lightbox-prev,#lightbox-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,107,0,.2);border:1px solid var(--orange);color:#fff;font-size:1.5rem;cursor:pointer;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#lightbox-prev{left:12px}#lightbox-next{right:12px}
+#lightbox-prev:hover,#lightbox-next:hover{background:var(--orange)}
+
 /* ============ FOOTER ============ */
 footer{padding:40px;text-align:center;border-top:1px solid var(--border);color:rgba(255,255,255,.4);font-size:.88rem}
 .footer-logo img{height:50px;filter:drop-shadow(0 0 10px rgba(255,107,0,.4));margin-bottom:12px}
@@ -257,6 +274,7 @@ footer{padding:40px;text-align:center;border-top:1px solid var(--border);color:r
     <li><a href="#sobre">La Fiesta</a></li>
     <li><a href="#premios">Premios</a></li>
     <li><a href="#categorias">Categorías</a></li>
+    <li><a href="#galeria">Fotos</a></li>
     <li><a href="#registro">Asistencia</a></li>
   </ul>
   <div class="nav-actions">
@@ -272,6 +290,7 @@ footer{padding:40px;text-align:center;border-top:1px solid var(--border);color:r
   <a href="#sobre" onclick="closeMenu()">🎉 La Fiesta</a>
   <a href="#premios" onclick="closeMenu()">🏆 Premios</a>
   <a href="#categorias" onclick="closeMenu()">🎭 Categorías</a>
+  <a href="#galeria" onclick="closeMenu()">📸 Fotos</a>
   <a href="#registro" onclick="closeMenu()">📋 Asistencia</a>
   <button class="mobile-tickets" onclick="closeMenu();openModal()">🎟️ Comprar Entradas</button>
 </div>
@@ -435,6 +454,35 @@ footer{padding:40px;text-align:center;border-top:1px solid var(--border);color:r
   </div>
 </section>
 
+<!-- ========== GALERÍA ========== -->
+<section id="galeria">
+  <div class="section-label">Ediciones anteriores</div>
+  <h2 class="section-title reveal">📸 Así se Vive la FDD</h2>
+  <div class="galeria-grid">
+    <div class="galeria-item reveal" onclick="openLightbox(0)"><img src="fotos/26102019-0L4A3971.jpg" alt="FDD foto 1" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(1)"><img src="fotos/26102019-IMG_3886.jpg" alt="FDD foto 2" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(2)"><img src="fotos/26102019-IMG_3959.jpg" alt="FDD foto 3" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(3)"><img src="fotos/26102019-IMG_3965.jpg" alt="FDD foto 4" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(4)"><img src="fotos/26102019-IMG_3968.jpg" alt="FDD foto 5" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(5)"><img src="fotos/26102019-IMG_3971.jpg" alt="FDD foto 6" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(6)"><img src="fotos/26102019-IMG_4000.jpg" alt="FDD foto 7" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(7)"><img src="fotos/26102019-IMG_4022.jpg" alt="FDD foto 8" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(8)"><img src="fotos/26102019-IMG_4034.jpg" alt="FDD foto 9" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(9)"><img src="fotos/26102019-IMG_4095.jpg" alt="FDD foto 10" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(10)"><img src="fotos/26102019-IMG_4122.jpg" alt="FDD foto 11" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(11)"><img src="fotos/26102019-IMG_4144.jpg" alt="FDD foto 12" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(12)"><img src="fotos/26102019-IMG_4171.jpg" alt="FDD foto 13" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightboxOutside(event)">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button id="lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+  <img id="lightbox-img" src="" alt="">
+  <button id="lightbox-next" onclick="lightboxNav(1)">›</button>
+</div>
+
 <!-- ========== FOOTER ========== -->
 <footer>
   <div class="footer-logo"><img src="LOGO FDD.png" alt="FDD"></div>
@@ -472,112 +520,22 @@ footer{padding:40px;text-align:center;border-top:1px solid var(--border);color:r
 </div>
 
 <script>
-// ======= HORROR AUDIO — smooth ambient =======
-let audioCtx = null;
-let audioStarted = false;
-
-function buildHorrorAudio(){
-  if(audioStarted) return;
-  try{
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    audioStarted = true;
-  } catch(e){ return; }
-
-  const now = audioCtx.currentTime;
-
-  // Master compressor — prevents clipping/distortion
-  const comp = audioCtx.createDynamicsCompressor();
-  comp.threshold.value = -18;
-  comp.knee.value = 12;
-  comp.ratio.value = 6;
-  comp.attack.value = 0.1;
-  comp.release.value = 0.4;
-  comp.connect(audioCtx.destination);
-
-  // Master gain with fade-in
-  const master = audioCtx.createGain();
-  master.gain.setValueAtTime(0, now);
-  master.gain.linearRampToValueAtTime(0.7, now + 4);
-  master.connect(comp);
-
-  // Low-pass filter — makes everything warm, not harsh
-  const lpf = audioCtx.createBiquadFilter();
-  lpf.type = 'lowpass';
-  lpf.frequency.value = 800;
-  lpf.Q.value = 0.8;
-  lpf.connect(master);
-
-  // 1. Deep sine drone (NOT sawtooth — avoids harshness)
-  const drone = audioCtx.createOscillator();
-  const droneGain = audioCtx.createGain();
-  drone.type = 'sine';
-  drone.frequency.setValueAtTime(55, now);
-  drone.frequency.linearRampToValueAtTime(52, now + 20);
-  drone.frequency.linearRampToValueAtTime(58, now + 40);
-  droneGain.gain.setValueAtTime(0.35, now);
-  drone.connect(droneGain); droneGain.connect(lpf);
-  drone.start();
-
-  // 2. Eerie 5th harmony (pure sine)
-  const eerie = audioCtx.createOscillator();
-  const eerieGain = audioCtx.createGain();
-  eerie.type = 'sine';
-  eerie.frequency.setValueAtTime(110, now);
-  eerie.frequency.linearRampToValueAtTime(104, now + 15);
-  eerie.frequency.linearRampToValueAtTime(116, now + 30);
-  eerieGain.gain.setValueAtTime(0.15, now);
-  eerie.connect(eerieGain); eerieGain.connect(lpf);
-  eerie.start();
-
-  // 3. LFO tremolo on the drone (slow wobble effect)
-  const lfo = audioCtx.createOscillator();
-  const lfoGain = audioCtx.createGain();
-  lfo.type = 'sine';
-  lfo.frequency.value = 0.18; // very slow
-  lfoGain.gain.value = 0.08;
-  lfo.connect(lfoGain); lfoGain.connect(droneGain.gain);
-  lfo.start();
-
-  // 4. High whisper tone — very quiet
-  const whisper = audioCtx.createOscillator();
-  const whisperGain = audioCtx.createGain();
-  whisper.type = 'sine';
-  whisper.frequency.setValueAtTime(220, now);
-  whisper.frequency.linearRampToValueAtTime(210, now + 18);
-  whisper.frequency.linearRampToValueAtTime(225, now + 36);
-  whisperGain.gain.setValueAtTime(0, now);
-  whisperGain.gain.linearRampToValueAtTime(0.06, now + 6);
-  whisper.connect(whisperGain); whisperGain.connect(lpf);
-  whisper.start();
-
-  // 5. Soft filtered noise (wind effect) — NOT a loud burst
-  function windNoise(){
-    const dur = 3;
-    const buf = audioCtx.createBuffer(1, audioCtx.sampleRate * dur, audioCtx.sampleRate);
-    const data = buf.getChannelData(0);
-    for(let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1);
-    const src = audioCtx.createBufferSource();
-    const bpf = audioCtx.createBiquadFilter();
-    const wGain = audioCtx.createGain();
-    src.buffer = buf;
-    bpf.type = 'bandpass';
-    bpf.frequency.value = 300 + Math.random() * 200;
-    bpf.Q.value = 3;
-    wGain.gain.setValueAtTime(0, audioCtx.currentTime);
-    wGain.gain.linearRampToValueAtTime(0.018, audioCtx.currentTime + 1);
-    wGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + dur);
-    src.connect(bpf); bpf.connect(wGain); wGain.connect(master);
-    src.start();
-  }
-  // schedule wind sounds periodically
-  setTimeout(windNoise, 4000);
-  setTimeout(windNoise, 10000);
-  setInterval(windNoise, 16000);
+// ======= AUDIO via YouTube (embedded, hidden) =======
+function startMusic(){
+  // Si ya hay iframe, no duplicar
+  if(document.getElementById('yt-audio')) return;
+  const iframe = document.createElement('iframe');
+  iframe.id = 'yt-audio';
+  // Halloween Ambient Music (loop) — free YouTube track
+  iframe.src = 'https://www.youtube.com/embed/GI4fVkMF4Ks?autoplay=1&loop=1&playlist=GI4fVkMF4Ks&controls=0&mute=0&volume=30';
+  iframe.allow = 'autoplay';
+  iframe.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:0;left:0';
+  document.body.appendChild(iframe);
 }
 
 // ======= SPLASH SCREEN =======
 function enterSite(){
-  buildHorrorAudio();
+  startMusic();
   document.getElementById('splash').classList.add('hidden');
   document.body.style.overflow='auto';
 }
@@ -643,7 +601,40 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 function openModal(){document.getElementById('modal-proximamente').classList.add('open')}
 function closeModal(){document.getElementById('modal-proximamente').classList.remove('open')}
 function closeModalOutside(e){if(e.target===document.getElementById('modal-proximamente'))closeModal()}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){ closeModal(); closeLightbox(); }
+});
+
+// Lightbox
+const lbImgs = [
+  'fotos/26102019-0L4A3971.jpg','fotos/26102019-IMG_3886.jpg','fotos/26102019-IMG_3959.jpg',
+  'fotos/26102019-IMG_3965.jpg','fotos/26102019-IMG_3968.jpg','fotos/26102019-IMG_3971.jpg',
+  'fotos/26102019-IMG_4000.jpg','fotos/26102019-IMG_4022.jpg','fotos/26102019-IMG_4034.jpg',
+  'fotos/26102019-IMG_4095.jpg','fotos/26102019-IMG_4122.jpg','fotos/26102019-IMG_4144.jpg',
+  'fotos/26102019-IMG_4171.jpg'
+];
+let lbCurrent = 0;
+function openLightbox(i){
+  lbCurrent = i;
+  document.getElementById('lightbox-img').src = lbImgs[i];
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = 'auto';
+}
+function closeLightboxOutside(e){ if(e.target===document.getElementById('lightbox')) closeLightbox(); }
+function lightboxNav(dir){
+  lbCurrent = (lbCurrent + dir + lbImgs.length) % lbImgs.length;
+  document.getElementById('lightbox-img').src = lbImgs[lbCurrent];
+}
+// Arrow keys for lightbox
+document.addEventListener('keydown', e=>{
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key==='ArrowRight') lightboxNav(1);
+  if(e.key==='ArrowLeft') lightboxNav(-1);
+});
 
 // Form
 document.getElementById('fdd-form').addEventListener('submit',function(e){
