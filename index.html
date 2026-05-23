@@ -590,62 +590,35 @@ footer{padding:48px 40px;text-align:center;border-top:1px solid var(--border)}
 </div>
 
 <script>
-// ======= AUDIO — Stranger Things Synthwave =======
-let _audioCtx = null;
+// ======= AUDIO — Running Up That Hill · Kate Bush (Stranger Things) =======
+let _musicStarted = false;
 function startMusic(){
-  if(_audioCtx) return;
-  try{
-    _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if(_audioCtx.state==='suspended') _audioCtx.resume();
-    const ctx = _audioCtx, t0 = ctx.currentTime + 0.2;
+  if(_musicStarted) return;
+  _musicStarted = true;
+  // Crear iframe oculto — se crea DENTRO del gesto del usuario para permitir autoplay
+  const yt = document.createElement('iframe');
+  yt.id = 'yt-music';
+  // Running Up That Hill - Kate Bush (video oficial)
+  yt.src = 'https://www.youtube.com/embed/wp430Z4tBtg?autoplay=1&loop=1&playlist=wp430Z4tBtg&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&start=0';
+  yt.allow = 'autoplay; encrypted-media';
+  yt.setAttribute('allowfullscreen', '');
+  yt.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:-1px;left:-1px;border:none';
+  document.body.appendChild(yt);
 
-    // Delay (reverb feel)
-    const delay = ctx.createDelay(1.0);
-    delay.delayTime.value = 0.35;
-    const dGain = ctx.createGain(); dGain.gain.value = 0.28;
-    delay.connect(dGain); dGain.connect(delay);
-
-    // Master
-    const master = ctx.createGain();
-    master.gain.setValueAtTime(0, t0);
-    master.gain.linearRampToValueAtTime(0.22, t0 + 4);
-    master.connect(ctx.destination);
-    dGain.connect(master);
-
-    // Note frequencies (E minor / ST style)
-    const E4=329.63,G4=392,B4=493.88,E5=659.25;
-    const D4=293.66,D5=587.33,C4=261.63,A3=220,E3=164.81;
-    const BPM=76, b=60/BPM, s=b/4; // slow & atmospheric
-
-    // ST-style arpeggio
-    const seq=[
-      [E4,s],[G4,s],[B4,s],[E5,b*.8],[null,s],
-      [E4,s],[G4,s],[B4,s],[E5,b*.8],[null,s],
-      [A3,s],[E4,s],[C4,s],[E5,b*.8],[null,s],
-      [D4,s],[G4,s],[B4,s],[D5,b*.8],[null,s*2],
-    ];
-
-    function playNote(freq,start,dur,vol=.65,type='sine'){
-      const osc=ctx.createOscillator(),g=ctx.createGain();
-      osc.type=type; osc.frequency.value=freq;
-      g.gain.setValueAtTime(0,start);
-      g.gain.linearRampToValueAtTime(vol,start+0.03);
-      g.gain.setValueAtTime(vol,start+dur*.7);
-      g.gain.linearRampToValueAtTime(0,start+dur);
-      osc.connect(g); g.connect(master); g.connect(delay);
-      osc.start(start); osc.stop(start+dur+.05);
-    }
-    function playSeq(t0){
-      let t=t0;
-      for(const [f,d] of seq){ if(f) playNote(f,t,d*.85); t+=d; }
-      // bass pulse every 4 beats
-      for(let i=0;i<4;i++) playNote(E3,t0+i*b,b*.4,.38,'sine');
-      return t;
-    }
-    const dur=seq.reduce((s,[,d])=>s+d,0);
-    function loop(t){ playSeq(t); setTimeout(()=>loop(t+dur),(dur-.15)*1000); }
-    loop(t0);
-  }catch(e){ console.warn('Audio:',e); }
+  // Botón de control de música (mute/unmute)
+  const btn = document.createElement('button');
+  btn.id = 'music-btn';
+  btn.innerHTML = '🎵';
+  btn.title = 'Running Up That Hill — Kate Bush';
+  btn.style.cssText = 'position:fixed;bottom:96px;right:28px;z-index:900;width:46px;height:46px;border-radius:50%;background:rgba(196,30,58,.15);border:1px solid rgba(196,30,58,.4);color:#fff;font-size:1.1rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px)';
+  let muted = false;
+  btn.onclick = () => {
+    muted = !muted;
+    yt.src = yt.src.replace(/&mute=\d/,'') + (muted ? '&mute=1' : '');
+    btn.innerHTML = muted ? '🔇' : '🎵';
+    btn.style.opacity = muted ? '.5' : '1';
+  };
+  document.body.appendChild(btn);
 }
 
 // ======= SPLASH =======
