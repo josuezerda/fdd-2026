@@ -118,7 +118,7 @@ section{padding:90px 40px;position:relative;overflow:hidden}
 .lightning-container{position:absolute;inset:0;pointer-events:none;z-index:1}
 .lightning-bolt{position:absolute;top:0;width:3px;background:linear-gradient(to bottom,rgba(255,20,66,0),var(--neon-red) 30%,#ff6688 60%,rgba(255,20,66,0));border-radius:2px;opacity:0;transform-origin:top center}
 .lightning-bolt::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60px;height:100%;background:radial-gradient(ellipse,rgba(255,20,66,.15),transparent 70%);border-radius:50%;filter:blur(8px)}
-.lightning-glow{position:absolute;inset:0;background:rgba(196,30,58,.04);opacity:0;pointer-events:none}
+.lightning-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,20,66,.18) 0%,rgba(196,30,58,.08) 40%,transparent 70%);opacity:0;pointer-events:none;transition:opacity .15s}
 .hero-badge{font-family:'Special Elite',cursive;font-size:.65rem;color:var(--neon-red);letter-spacing:.35em;text-transform:uppercase;margin-bottom:20px;border:1px solid rgba(196,30,58,.4);display:inline-block;padding:6px 16px}
 .hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,8vw,6rem);font-weight:900;color:#fff;line-height:1;margin-bottom:16px;text-shadow:0 0 60px rgba(196,30,58,.6)}
 .hero-year{font-family:'Special Elite',cursive;font-size:clamp(1rem,3vw,1.6rem);color:var(--neon-red);letter-spacing:.5em;text-transform:uppercase;margin-bottom:12px;animation:flicker 8s infinite}
@@ -646,86 +646,119 @@ for(let i=0;i<35;i++){
 
 // ======= LIGHTNING BOLTS + THUNDER =======
 function makeLightningPath(){
-  // Genera un rayo SVG en zigzag
   const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-  const h = 250 + Math.random()*250;
-  const w = 40;
+  // Más alto y ancho que antes
+  const h = 450 + Math.random()*350;
+  const w = 80;
   svg.setAttribute('width', w);
   svg.setAttribute('height', h);
   svg.style.cssText = 'position:absolute;top:0;overflow:visible;pointer-events:none';
+
+  // Rayo principal (grueso)
   let d = `M${w/2} 0`;
   let y = 0;
   while(y < h){
-    const step = 20 + Math.random()*30;
+    const step = 30 + Math.random()*50;
     y += step;
-    const x = Math.random()*w;
+    const x = 10 + Math.random()*(w-20);
     d += ` L${x} ${y}`;
   }
+  // Rayo secundario (bifurcación)
+  let d2 = `M${w/2} ${h*0.3}`;
+  let y2 = h*0.3;
+  while(y2 < h*0.7){
+    y2 += 25 + Math.random()*35;
+    d2 += ` L${10+Math.random()*(w-20)} ${y2}`;
+  }
+
+  const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+  // Filtro de glow fuerte
+  const filter = document.createElementNS('http://www.w3.org/2000/svg','filter');
+  filter.setAttribute('id','lglow'); filter.setAttribute('x','-200%'); filter.setAttribute('y','-20%');
+  filter.setAttribute('width','500%'); filter.setAttribute('height','140%');
+  const blur = document.createElementNS('http://www.w3.org/2000/svg','feGaussianBlur');
+  blur.setAttribute('stdDeviation','10'); blur.setAttribute('result','coloredBlur');
+  const merge = document.createElementNS('http://www.w3.org/2000/svg','feMerge');
+  ['coloredBlur','coloredBlur','SourceGraphic'].forEach(n=>{
+    const mn=document.createElementNS('http://www.w3.org/2000/svg','feMergeNode');
+    mn.setAttribute('in',n); merge.appendChild(mn);
+  });
+  filter.appendChild(blur); filter.appendChild(merge); defs.appendChild(filter);
+
+  // Rayo principal
   const path = document.createElementNS('http://www.w3.org/2000/svg','path');
   path.setAttribute('d', d);
   path.setAttribute('stroke', '#ff1442');
-  path.setAttribute('stroke-width', 2 + Math.random()*2);
-  path.setAttribute('fill', 'none');
-  path.setAttribute('filter', 'url(#glow)');
-  // glow filter
-  const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
-  const filter = document.createElementNS('http://www.w3.org/2000/svg','filter');
-  filter.setAttribute('id','glow');
-  const blur = document.createElementNS('http://www.w3.org/2000/svg','feGaussianBlur');
-  blur.setAttribute('stdDeviation','4'); blur.setAttribute('result','coloredBlur');
-  const merge = document.createElementNS('http://www.w3.org/2000/svg','feMerge');
-  ['coloredBlur','SourceGraphic'].forEach(n=>{ const mn=document.createElementNS('http://www.w3.org/2000/svg','feMergeNode'); mn.setAttribute('in',n); merge.appendChild(mn); });
-  filter.appendChild(blur); filter.appendChild(merge); defs.appendChild(filter);
-  svg.appendChild(defs); svg.appendChild(path);
-  return svg;
-}
+  path.setAttribute('stroke-width', 3 + Math.random()*4);
+  path.setAttribute('fill','none');
+  path.setAttribute('filter','url(#lglow)');
+  path.setAttribute('stroke-linecap','round');
 
-function thunderSound(){
-  if(!_musicStarted) return; // solo si ya entraron al sitio
-  try{
-    const ac = new (window.AudioContext||window.webkitAudioContext)();
-    const buf = ac.createBuffer(1, ac.sampleRate*1.5, ac.sampleRate);
-    const d = buf.getChannelData(0);
-    for(let i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.max(0,1-i/(ac.sampleRate*.4))*0.3;
-    const src = ac.createBufferSource();
-    const g = ac.createGain();
-    g.gain.setValueAtTime(0.5,0);
-    g.gain.linearRampToValueAtTime(0,1.5);
-    src.buffer=buf; src.connect(g); g.connect(ac.destination);
-    src.start();
-  }catch(e){}
+  // Núcleo blanco (hace parecer más real y brillante)
+  const core = document.createElementNS('http://www.w3.org/2000/svg','path');
+  core.setAttribute('d', d);
+  core.setAttribute('stroke', 'rgba(255,200,200,0.9)');
+  core.setAttribute('stroke-width', 1.5);
+  core.setAttribute('fill','none');
+  core.setAttribute('stroke-linecap','round');
+
+  // Bifurcación
+  const branch = document.createElementNS('http://www.w3.org/2000/svg','path');
+  branch.setAttribute('d', d2);
+  branch.setAttribute('stroke', '#ff3366');
+  branch.setAttribute('stroke-width', 1.5);
+  branch.setAttribute('fill','none');
+  branch.setAttribute('filter','url(#lglow)');
+  branch.setAttribute('stroke-linecap','round');
+
+  svg.appendChild(defs);
+  svg.appendChild(path);
+  svg.appendChild(core);
+  svg.appendChild(branch);
+  return svg;
 }
 
 function spawnLightning(){
   const lc = document.getElementById('lightning-container');
   const glow = document.getElementById('lightning-glow');
-  const count = 1 + Math.floor(Math.random()*2);
-  for(let i=0;i<count;i++){
-    const bolt = makeLightningPath();
-    bolt.style.left = (5 + Math.random()*90) + '%';
-    bolt.style.top = '0';
-    bolt.style.opacity = '0';
-    lc.appendChild(bolt);
-    // Flash animation
-    bolt.style.transition = 'opacity .05s';
+  const bolt = makeLightningPath();
+  bolt.style.left = (3 + Math.random()*88) + '%';
+  bolt.style.top = '0';
+  bolt.style.opacity = '0';
+  lc.appendChild(bolt);
+
+  // FASE 1: aparece suave (más lento que antes)
+  setTimeout(()=>{
+    bolt.style.transition = 'opacity .12s ease-in';
     bolt.style.opacity = '1';
-    if(glow){
-      glow.style.transition='opacity .05s';
-      glow.style.opacity='1';
-    }
-    setTimeout(()=>{ bolt.style.opacity='0'; if(glow) glow.style.opacity='0'; },80);
-    setTimeout(()=>{
-      bolt.style.opacity='.7';
-      if(glow) glow.style.opacity='.8';
-    },130);
-    setTimeout(()=>{ bolt.style.opacity='0'; if(glow) glow.style.opacity='0'; bolt.remove(); },200);
-  }
-  thunderSound();
-  // Programar próximo rayo (aleatorio entre 3-10 segundos)
-  setTimeout(spawnLightning, 3000 + Math.random()*7000);
+    if(glow){ glow.style.transition='opacity .12s'; glow.style.opacity='1'; }
+  }, 10);
+  // FASE 2: primer parpadeo
+  setTimeout(()=>{
+    bolt.style.transition='opacity .08s';
+    bolt.style.opacity='.2';
+    if(glow){ glow.style.opacity='.2'; }
+  }, 180);
+  // FASE 3: vuelve fuerte
+  setTimeout(()=>{
+    bolt.style.transition='opacity .10s';
+    bolt.style.opacity='.95';
+    if(glow){ glow.style.transition='opacity .10s'; glow.style.opacity='.9'; }
+  }, 280);
+  // FASE 4: desvanece lentamente
+  setTimeout(()=>{
+    bolt.style.transition='opacity .4s ease-out';
+    bolt.style.opacity='0';
+    if(glow){ glow.style.transition='opacity .4s'; glow.style.opacity='0'; }
+  }, 450);
+  setTimeout(()=>bolt.remove(), 900);
+
+  // Próximo rayo: cada 5-14 segundos (más espaciados)
+  setTimeout(spawnLightning, 5000 + Math.random()*9000);
 }
-// Iniciar rayos en hero después de un delay inicial
-setTimeout(spawnLightning, 2000);
+// Primer rayo después de 3 segundos de estar en la home
+setTimeout(spawnLightning, 3000);
+
 
 // ======= HAMBURGER =======
 function toggleMenu(){
