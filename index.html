@@ -34,14 +34,25 @@ body{background:var(--dark);color:#fff;font-family:'Inter',sans-serif;overflow-x
 @keyframes pulse-btn{0%,100%{box-shadow:0 0 40px rgba(255,107,0,.5)}50%{box-shadow:0 0 70px rgba(255,107,0,.8)}}
 
 /* ============ NAV ============ */
-nav{position:fixed;top:0;width:100%;z-index:100;padding:12px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,5,8,0.75);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-logo img{height:48px;filter:drop-shadow(0 0 8px rgba(255,107,0,.5))}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:12px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,5,8,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo img{height:44px;filter:drop-shadow(0 0 8px rgba(255,107,0,.5))}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;letter-spacing:.05em;transition:color .3s}
 .nav-links a:hover{color:var(--orange)}
 .nav-actions{display:flex;gap:12px;align-items:center}
 .nav-btn-tickets{background:linear-gradient(135deg,var(--orange),#ff9500);color:#fff;padding:10px 22px;border-radius:50px;text-decoration:none;font-weight:700;font-size:.85rem;transition:all .2s;cursor:pointer;border:none;font-family:inherit}
 .nav-btn-tickets:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,107,0,.4)}
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;z-index:200}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(5,5,8,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:20px 24px;flex-direction:column;gap:0;z-index:99;transform:translateY(-10px);opacity:0;transition:all .3s}
+.mobile-menu.open{display:flex;transform:translateY(0);opacity:1}
+.mobile-menu a{color:rgba(255,255,255,.85);text-decoration:none;font-size:1rem;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);letter-spacing:.05em}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu .mobile-tickets{margin-top:16px;background:linear-gradient(135deg,var(--orange),#ff9500);color:#fff;padding:14px;border-radius:50px;text-align:center;font-weight:700;cursor:pointer;border:none;font-family:inherit;width:100%;font-size:1rem}
 
 /* ============ HERO ============ */
 #hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:80px 20px 40px}
@@ -165,16 +176,55 @@ footer{padding:40px;text-align:center;border-top:1px solid var(--border);color:r
 .reveal.visible{opacity:1;transform:translateY(0)}
 
 /* ============ RESPONSIVE ============ */
+@media(max-width:900px){
+  nav{padding:12px 20px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .nav-btn-tickets{display:none}
+}
 @media(max-width:768px){
   nav{padding:10px 16px}
-  .nav-links{display:none}
-  #sobre{grid-template-columns:1fr;gap:40px}
-  .premios-grid{grid-template-columns:1fr}
+  #hero{padding:80px 16px 40px}
+  .hero-btns{gap:10px}
+  .hero-btns button{padding:13px 22px;font-size:.9rem}
+  #countdown{padding:48px 16px}
+  .countdown-grid{gap:10px}
+  .countdown-item{padding:18px 16px;min-width:80px;border-radius:14px}
+  .countdown-num{font-size:2rem}
+  .countdown-label{font-size:.7rem}
+  #sobre{grid-template-columns:1fr;gap:32px;padding:60px 16px}
+  .sobre-img{padding:20px}
+  .sobre-img img{max-width:220px}
+  .stats-grid{grid-template-columns:repeat(3,1fr);gap:10px}
+  .stat-card{padding:14px 8px}
+  .stat-num{font-size:1.4rem}
+  #premios{padding:60px 16px}
+  .premios-grid{grid-template-columns:1fr;max-width:100%}
+  .premio-card.gold{transform:scale(1)!important}
+  #categorias{padding:60px 16px}
+  .cat-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .cat-card{padding:22px 12px}
+  .cat-icon{font-size:2rem}
+  #entradas{padding:60px 16px}
+  .entradas-box{padding:32px 16px}
+  .ticket-grid{grid-template-columns:1fr;gap:14px;margin:24px 0}
+  #registro{padding:60px 16px}
+  .registro-box{padding:32px 16px}
   .form-row{grid-template-columns:1fr}
-  .modal-box{padding:40px 24px}
-  .countdown-item{padding:22px 28px;min-width:110px}
-  .countdown-num{font-size:2.5rem}
-  #wa-btn{bottom:20px;right:20px;width:54px;height:54px}
+  .modal-box{padding:36px 20px;border-radius:20px}
+  .modal-title{font-size:1.5rem}
+  .modal-emoji{font-size:3.5rem}
+  #wa-btn{bottom:20px;right:16px;width:54px;height:54px}
+  footer{padding:32px 16px}
+  .splash-logo img{width:160px}
+  .splash-enter-btn{padding:16px 40px;font-size:1rem}
+}
+@media(max-width:400px){
+  .countdown-item{padding:14px 10px;min-width:68px}
+  .countdown-num{font-size:1.7rem}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-btns{flex-direction:column;align-items:stretch}
+  .hero-btns button{width:100%}
 }
 </style>
 </head>
@@ -211,8 +261,20 @@ footer{padding:40px;text-align:center;border-top:1px solid var(--border);color:r
   </ul>
   <div class="nav-actions">
     <button class="nav-btn-tickets" onclick="openModal()">🎟️ Comprar Entradas</button>
+    <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#countdown" onclick="closeMenu()">⏱️ Cuándo</a>
+  <a href="#sobre" onclick="closeMenu()">🎉 La Fiesta</a>
+  <a href="#premios" onclick="closeMenu()">🏆 Premios</a>
+  <a href="#categorias" onclick="closeMenu()">🎭 Categorías</a>
+  <a href="#registro" onclick="closeMenu()">📋 Asistencia</a>
+  <button class="mobile-tickets" onclick="closeMenu();openModal()">🎟️ Comprar Entradas</button>
+</div>
 
 <!-- ========== HERO ========== -->
 <section id="hero">
@@ -407,67 +469,107 @@ footer{padding:40px;text-align:center;border-top:1px solid var(--border);color:r
 </div>
 
 <script>
-// ======= HORROR AUDIO (Web Audio API) =======
+// ======= HORROR AUDIO — smooth ambient =======
 let audioCtx = null;
-let audioNodes = [];
 let audioStarted = false;
 
 function buildHorrorAudio(){
   if(audioStarted) return;
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  audioStarted = true;
+  try{
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioStarted = true;
+  } catch(e){ return; }
 
-  // Deep drone bass
+  const now = audioCtx.currentTime;
+
+  // Master compressor — prevents clipping/distortion
+  const comp = audioCtx.createDynamicsCompressor();
+  comp.threshold.value = -18;
+  comp.knee.value = 12;
+  comp.ratio.value = 6;
+  comp.attack.value = 0.1;
+  comp.release.value = 0.4;
+  comp.connect(audioCtx.destination);
+
+  // Master gain with fade-in
+  const master = audioCtx.createGain();
+  master.gain.setValueAtTime(0, now);
+  master.gain.linearRampToValueAtTime(0.7, now + 4);
+  master.connect(comp);
+
+  // Low-pass filter — makes everything warm, not harsh
+  const lpf = audioCtx.createBiquadFilter();
+  lpf.type = 'lowpass';
+  lpf.frequency.value = 800;
+  lpf.Q.value = 0.8;
+  lpf.connect(master);
+
+  // 1. Deep sine drone (NOT sawtooth — avoids harshness)
   const drone = audioCtx.createOscillator();
   const droneGain = audioCtx.createGain();
-  drone.type = 'sawtooth';
-  drone.frequency.setValueAtTime(40, audioCtx.currentTime);
-  drone.frequency.linearRampToValueAtTime(45, audioCtx.currentTime+8);
-  drone.frequency.linearRampToValueAtTime(38, audioCtx.currentTime+16);
-  droneGain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-  drone.connect(droneGain); droneGain.connect(audioCtx.destination);
+  drone.type = 'sine';
+  drone.frequency.setValueAtTime(55, now);
+  drone.frequency.linearRampToValueAtTime(52, now + 20);
+  drone.frequency.linearRampToValueAtTime(58, now + 40);
+  droneGain.gain.setValueAtTime(0.35, now);
+  drone.connect(droneGain); droneGain.connect(lpf);
   drone.start();
 
-  // Eerie mid tone
+  // 2. Eerie 5th harmony (pure sine)
   const eerie = audioCtx.createOscillator();
   const eerieGain = audioCtx.createGain();
   eerie.type = 'sine';
-  eerie.frequency.setValueAtTime(220, audioCtx.currentTime);
-  eerie.frequency.linearRampToValueAtTime(185, audioCtx.currentTime+6);
-  eerie.frequency.linearRampToValueAtTime(230, audioCtx.currentTime+12);
-  eerieGain.gain.setValueAtTime(0, audioCtx.currentTime);
-  eerieGain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime+3);
-  eerie.connect(eerieGain); eerieGain.connect(audioCtx.destination);
+  eerie.frequency.setValueAtTime(110, now);
+  eerie.frequency.linearRampToValueAtTime(104, now + 15);
+  eerie.frequency.linearRampToValueAtTime(116, now + 30);
+  eerieGain.gain.setValueAtTime(0.15, now);
+  eerie.connect(eerieGain); eerieGain.connect(lpf);
   eerie.start();
 
-  // Dissonant high
-  const high = audioCtx.createOscillator();
-  const highGain = audioCtx.createGain();
-  high.type = 'sine';
-  high.frequency.setValueAtTime(311, audioCtx.currentTime);
-  high.frequency.linearRampToValueAtTime(294, audioCtx.currentTime+10);
-  highGain.gain.setValueAtTime(0, audioCtx.currentTime);
-  highGain.gain.linearRampToValueAtTime(0.02, audioCtx.currentTime+5);
-  high.connect(highGain); highGain.connect(audioCtx.destination);
-  high.start();
+  // 3. LFO tremolo on the drone (slow wobble effect)
+  const lfo = audioCtx.createOscillator();
+  const lfoGain = audioCtx.createGain();
+  lfo.type = 'sine';
+  lfo.frequency.value = 0.18; // very slow
+  lfoGain.gain.value = 0.08;
+  lfo.connect(lfoGain); lfoGain.connect(droneGain.gain);
+  lfo.start();
 
-  // Noise burst
-  function spookyBurst(){
-    const buf = audioCtx.createBuffer(1, audioCtx.sampleRate*0.4, audioCtx.sampleRate);
+  // 4. High whisper tone — very quiet
+  const whisper = audioCtx.createOscillator();
+  const whisperGain = audioCtx.createGain();
+  whisper.type = 'sine';
+  whisper.frequency.setValueAtTime(220, now);
+  whisper.frequency.linearRampToValueAtTime(210, now + 18);
+  whisper.frequency.linearRampToValueAtTime(225, now + 36);
+  whisperGain.gain.setValueAtTime(0, now);
+  whisperGain.gain.linearRampToValueAtTime(0.06, now + 6);
+  whisper.connect(whisperGain); whisperGain.connect(lpf);
+  whisper.start();
+
+  // 5. Soft filtered noise (wind effect) — NOT a loud burst
+  function windNoise(){
+    const dur = 3;
+    const buf = audioCtx.createBuffer(1, audioCtx.sampleRate * dur, audioCtx.sampleRate);
     const data = buf.getChannelData(0);
-    for(let i=0;i<data.length;i++) data[i]=(Math.random()*2-1)*0.015;
+    for(let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1);
     const src = audioCtx.createBufferSource();
-    const gainN = audioCtx.createGain();
+    const bpf = audioCtx.createBiquadFilter();
+    const wGain = audioCtx.createGain();
     src.buffer = buf;
-    gainN.gain.setValueAtTime(0.3, audioCtx.currentTime);
-    gainN.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime+0.4);
-    src.connect(gainN); gainN.connect(audioCtx.destination);
+    bpf.type = 'bandpass';
+    bpf.frequency.value = 300 + Math.random() * 200;
+    bpf.Q.value = 3;
+    wGain.gain.setValueAtTime(0, audioCtx.currentTime);
+    wGain.gain.linearRampToValueAtTime(0.018, audioCtx.currentTime + 1);
+    wGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + dur);
+    src.connect(bpf); bpf.connect(wGain); wGain.connect(master);
     src.start();
   }
-  setTimeout(spookyBurst, 2000);
-  setTimeout(spookyBurst, 6000);
-  setTimeout(spookyBurst, 11000);
-  setInterval(spookyBurst, 14000);
+  // schedule wind sounds periodically
+  setTimeout(windNoise, 4000);
+  setTimeout(windNoise, 10000);
+  setInterval(windNoise, 16000);
 }
 
 // ======= SPLASH SCREEN =======
@@ -476,6 +578,24 @@ function enterSite(){
   document.getElementById('splash').classList.add('hidden');
   document.body.style.overflow='auto';
 }
+
+// ======= HAMBURGER MENU =======
+function toggleMenu(){
+  const menu = document.getElementById('mobile-menu');
+  const btn = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+// Close menu on outside click
+document.addEventListener('click', function(e){
+  const menu = document.getElementById('mobile-menu');
+  const btn = document.getElementById('hamburger');
+  if(menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) closeMenu();
+});
 
 // Splash particles
 const sp = document.getElementById('splash-particles');
@@ -490,7 +610,7 @@ for(let i=0;i<30;i++){
 // Lock scroll until entry
 document.body.style.overflow='hidden';
 
-// ======= HERO PARTICLES =======
+// Hero particles
 const container=document.getElementById('particles');
 for(let i=0;i<20;i++){
   const p=document.createElement('div');
@@ -499,7 +619,7 @@ for(let i=0;i<20;i++){
   container.appendChild(p);
 }
 
-// ======= COUNTDOWN — 31 Oct 2026 22:00 =======
+// Countdown — 31 Oct 2026 22:00
 const target=new Date('2026-10-31T22:00:00');
 function updateCD(){
   const diff=target-new Date();
@@ -512,17 +632,17 @@ function updateCD(){
 }
 updateCD(); setInterval(updateCD,1000);
 
-// ======= SCROLL REVEAL =======
+// Scroll reveal
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// ======= MODAL =======
+// Modal
 function openModal(){document.getElementById('modal-proximamente').classList.add('open')}
 function closeModal(){document.getElementById('modal-proximamente').classList.remove('open')}
 function closeModalOutside(e){if(e.target===document.getElementById('modal-proximamente'))closeModal()}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
-// ======= FORM =======
+// Form
 document.getElementById('fdd-form').addEventListener('submit',function(e){
   e.preventDefault();
   this.style.display='none';
