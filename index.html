@@ -520,17 +520,36 @@ footer{padding:40px;text-align:center;border-top:1px solid var(--border);color:r
 </div>
 
 <script>
-// ======= AUDIO via YouTube (embedded, hidden) =======
+// ======= AUDIO — Web Audio API =======
+let _audioCtx = null;
 function startMusic(){
-  // Si ya hay iframe, no duplicar
-  if(document.getElementById('yt-audio')) return;
-  const iframe = document.createElement('iframe');
-  iframe.id = 'yt-audio';
-  // Halloween Ambient Music (loop) — free YouTube track
-  iframe.src = 'https://www.youtube.com/embed/GI4fVkMF4Ks?autoplay=1&loop=1&playlist=GI4fVkMF4Ks&controls=0&mute=0&volume=30';
-  iframe.allow = 'autoplay';
-  iframe.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:0;left:0';
-  document.body.appendChild(iframe);
+  if(_audioCtx) return;
+  try{
+    _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(_audioCtx.state === 'suspended') _audioCtx.resume();
+    const t = _audioCtx.currentTime;
+    // Master gain: fade 0 → 0.13 en 3 seg
+    const master = _audioCtx.createGain();
+    master.gain.setValueAtTime(0, t);
+    master.gain.linearRampToValueAtTime(0.13, t + 3);
+    master.connect(_audioCtx.destination);
+    // Oscilador 1 — grave oscuro (60 Hz)
+    const o1 = _audioCtx.createOscillator();
+    o1.type = 'sine'; o1.frequency.value = 60;
+    o1.connect(master); o1.start(t);
+    // Oscilador 2 — quinta justa (90 Hz)
+    const g2 = _audioCtx.createGain(); g2.gain.value = 0.55;
+    const o2 = _audioCtx.createOscillator();
+    o2.type = 'sine'; o2.frequency.value = 90;
+    o2.connect(g2); g2.connect(master); o2.start(t);
+    // Oscilador 3 — susurro alto (220 Hz), entra lento
+    const g3 = _audioCtx.createGain();
+    g3.gain.setValueAtTime(0, t);
+    g3.gain.linearRampToValueAtTime(0.2, t + 8);
+    const o3 = _audioCtx.createOscillator();
+    o3.type = 'sine'; o3.frequency.value = 220;
+    o3.connect(g3); g3.connect(master); o3.start(t);
+  } catch(e){ console.warn('Audio:', e); }
 }
 
 // ======= SPLASH SCREEN =======
