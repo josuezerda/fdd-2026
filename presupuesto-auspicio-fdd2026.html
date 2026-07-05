@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Propuesta Comercial — Auspicio FDD 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page{size:A4;margin:0}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;font-size:11px;line-height:1.6}
+
+  /* ── PORTADA ── */
+  .cover{width:210mm;height:297mm;background:linear-gradient(160deg,#020005 0%,#1a0015 40%,#0d0020 70%,#020005 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;page-break-after:always}
+  .cover-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(196,30,58,.18) 0%,transparent 65%)}
+  .cover-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(196,30,58,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(196,30,58,.06) 1px,transparent 1px);background-size:30px 30px}
+  .cover-content{position:relative;z-index:2;text-align:center;padding:40px}
+  .cover-logo{width:140px;margin-bottom:20px;filter:drop-shadow(0 0 30px rgba(255,20,66,.5))}
+  .cover-label{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:.5em;color:rgba(255,20,66,.7);text-transform:uppercase;margin-bottom:12px;border:1px solid rgba(196,30,58,.3);display:inline-block;padding:5px 20px}
+  .cover-title{font-family:'Cinzel',serif;font-size:32px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:8px;text-shadow:0 0 40px rgba(196,30,58,.4)}
+  .cover-sub{font-family:'Cinzel',serif;font-size:18px;color:#ff1442;font-weight:700;margin-bottom:6px;text-shadow:0 0 20px rgba(255,20,66,.4)}
+  .cover-year{font-size:9px;letter-spacing:.4em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:32px}
+  .cover-divider{width:200px;height:1px;background:linear-gradient(to right,transparent,#c41e3a,transparent);margin:0 auto 32px}
+  .cover-doc{font-size:9px;letter-spacing:.3em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:8px}
+  .cover-price{font-family:'Cinzel',serif;font-size:28px;color:#ff1442;font-weight:900;text-shadow:0 0 30px rgba(255,20,66,.5)}
+  .cover-price-label{font-size:8px;letter-spacing:.3em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:4px}
+  .cover-footer{position:absolute;bottom:24px;left:0;right:0;text-align:center;font-size:8px;letter-spacing:.25em;color:rgba(255,255,255,.15);text-transform:uppercase}
+
+  /* ── PÁGINAS INTERNAS ── */
+  .page{width:210mm;min-height:297mm;padding:14mm 16mm;page-break-after:always;position:relative}
+  .page:last-child{page-break-after:avoid}
+
+  /* HEADER INTERNO */
+  .page-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:2px solid #c41e3a;margin-bottom:18px}
+  .ph-logo{font-family:'Cinzel',serif;font-size:13px;font-weight:900;color:#c41e3a;letter-spacing:.05em}
+  .ph-doc{font-size:8px;color:#999;letter-spacing:.2em;text-transform:uppercase}
+  .ph-page{font-size:8px;color:#c41e3a;letter-spacing:.15em}
+
+  /* SECTION TITLE */
+  .section-label{font-size:7px;letter-spacing:.4em;color:#c41e3a;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .section-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(196,30,58,.3),transparent)}
+  .section-title{font-family:'Cinzel',serif;font-size:16px;font-weight:900;color:#1a0015;margin-bottom:16px;line-height:1.2}
+
+  /* INTRO BOX */
+  .intro-box{background:linear-gradient(135deg,#1a0015,#0d0020);color:#fff;padding:18px 22px;border-left:3px solid #c41e3a;margin-bottom:20px}
+  .intro-box p{font-size:10.5px;line-height:1.8;color:rgba(255,255,255,.85)}
+  .intro-box strong{color:#ff6680}
+
+  /* STATS ROW */
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+  .stat-box{border:1px solid rgba(196,30,58,.25);padding:14px 10px;text-align:center;background:#fef9f9}
+  .stat-num{font-family:'Cinzel',serif;font-size:20px;font-weight:900;color:#c41e3a;display:block;line-height:1}
+  .stat-label{font-size:8px;color:#666;letter-spacing:.15em;text-transform:uppercase;margin-top:4px;display:block}
+
+  /* BENEFICIOS GRID */
+  .benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+  .benefit-card{border:1px solid #e8e0f0;padding:14px;position:relative;overflow:hidden}
+  .benefit-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:#c41e3a}
+  .benefit-icon{font-size:18px;margin-bottom:8px;display:block}
+  .benefit-title{font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:#1a0015;margin-bottom:6px;letter-spacing:.03em}
+  .benefit-list{list-style:none;padding:0}
+  .benefit-list li{font-size:9.5px;color:#444;padding:2px 0;display:flex;align-items:flex-start;gap:6px;line-height:1.5}
+  .benefit-list li::before{content:'›';color:#c41e3a;font-weight:700;flex-shrink:0;margin-top:1px}
+
+  /* TECH SECTION */
+  .tech-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+  .tech-card{background:linear-gradient(160deg,#1a0015,#0d0020);color:#fff;padding:16px 14px;border-top:2px solid #c41e3a}
+  .tech-card-icon{font-size:20px;margin-bottom:8px;display:block}
+  .tech-card-title{font-family:'Cinzel',serif;font-size:9px;font-weight:700;color:#ff6680;margin-bottom:8px;letter-spacing:.05em;text-transform:uppercase}
+  .tech-card-list{list-style:none;padding:0}
+  .tech-card-list li{font-size:9px;color:rgba(255,255,255,.75);padding:2px 0;display:flex;align-items:flex-start;gap:5px;line-height:1.5}
+  .tech-card-list li::before{content:'✦';color:#c41e3a;font-size:7px;flex-shrink:0;margin-top:2px}
+
+  /* PRICING TABLE */
+  .price-table{width:100%;border-collapse:collapse;margin-bottom:20px}
+  .price-table th{background:#1a0015;color:#ff6680;font-family:'Cinzel',serif;font-size:9px;padding:10px 12px;text-align:left;letter-spacing:.08em;font-weight:700}
+  .price-table td{padding:9px 12px;font-size:9.5px;border-bottom:1px solid #f0e8f5;color:#333;vertical-align:middle}
+  .price-table tr:nth-child(even) td{background:#fdf8ff}
+  .price-table .total-row td{background:#1a0015;color:#fff;font-weight:700;font-size:10px;border-bottom:none}
+  .price-table .total-row td:last-child{color:#ff1442;font-family:'Cinzel',serif;font-size:14px}
+  .price-include{color:#16a34a;font-weight:600}
+  .price-tag{display:inline-block;background:rgba(196,30,58,.08);color:#c41e3a;font-size:8px;padding:2px 8px;border:1px solid rgba(196,30,58,.2);margin-left:4px}
+
+  /* HIGHLIGHT BOX */
+  .highlight-box{background:linear-gradient(135deg,#1a0015,#0d0020);border:1px solid rgba(255,20,66,.3);padding:20px 24px;text-align:center;margin-bottom:20px}
+  .hl-label{font-size:8px;letter-spacing:.4em;color:rgba(255,20,66,.6);text-transform:uppercase;margin-bottom:8px}
+  .hl-price{font-family:'Cinzel',serif;font-size:36px;color:#ff1442;font-weight:900;text-shadow:0 0 20px rgba(255,20,66,.3);line-height:1}
+  .hl-sub{font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.25em;text-transform:uppercase;margin-top:6px}
+
+  /* NOTE BOX */
+  .note-box{background:#fffbf0;border-left:3px solid #f59e0b;padding:12px 16px;margin-bottom:14px}
+  .note-box p{font-size:9.5px;color:#78350f;line-height:1.6}
+
+  /* CTA */
+  .cta-box{background:linear-gradient(135deg,#c41e3a,#8b0000);color:#fff;padding:22px 28px;text-align:center;margin-top:20px}
+  .cta-title{font-family:'Cinzel',serif;font-size:14px;font-weight:900;margin-bottom:8px}
+  .cta-sub{font-size:9.5px;opacity:.85;margin-bottom:14px;line-height:1.6}
+  .cta-contacts{display:flex;justify-content:center;gap:30px;font-size:9px}
+  .cta-contact{opacity:.9}
+  .cta-contact strong{display:block;font-size:10px;margin-bottom:2px}
+
+  /* FIRMA */
+  .firma-section{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:30px}
+  .firma-box{border-top:1px solid #ccc;padding-top:10px}
+  .firma-label{font-size:8px;color:#999;letter-spacing:.2em;text-transform:uppercase}
+  .firma-name{font-size:9.5px;color:#333;margin-top:16px;font-weight:600}
+  .firma-role{font-size:8.5px;color:#888}
+
+  /* PRINT */
+  @media print{
+    body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .page{page-break-after:always}
+    .cover{page-break-after:always}
+  }
+
+  /* BADGE */
+  .badge{display:inline-block;background:rgba(196,30,58,.1);border:1px solid rgba(196,30,58,.25);color:#c41e3a;font-size:8px;padding:3px 10px;letter-spacing:.15em;text-transform:uppercase;margin-left:6px;vertical-align:middle}
+  .badge-green{background:rgba(22,163,74,.1);border-color:rgba(22,163,74,.3);color:#16a34a}
+
+  .timeline{margin-bottom:20px}
+  .tl-item{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start}
+  .tl-dot{width:28px;height:28px;border-radius:50%;background:#c41e3a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:2px}
+  .tl-content .tl-title{font-weight:600;font-size:10px;color:#1a0015;margin-bottom:2px}
+  .tl-content .tl-desc{font-size:9.5px;color:#555;line-height:1.5}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  .col-box{border:1px solid #e8e0f0;padding:14px}
+  .col-box-title{font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:#c41e3a;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #f0e8f5}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     PORTADA
+════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-grid"></div>
+  <div class="cover-content">
+    <img class="cover-logo" src="logo-st.png" alt="FDD 2026">
+    <div class="cover-label">Propuesta Comercial Confidencial</div>
+    <div class="cover-title">FIESTA DE<br>DISFRACES</div>
+    <div class="cover-sub">HAWKINS EDITION</div>
+    <div class="cover-year">2026 · Edición N° 10 · Santiago del Estero</div>
+    <div class="cover-divider"></div>
+    <div class="cover-doc">Paquete de Auspicio + Acompañamiento Tecnológico</div>
+    <div class="cover-price">$5.000.000</div>
+    <div class="cover-price-label">Inversión Total · Pesos Argentinos</div>
+  </div>
+  <div class="cover-footer">Fusión IA - Fuego Creativo · Confidencial · Mayo 2026</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PÁGINA 1 — PRESENTACIÓN DEL EVENTO
+════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="ph-logo">FDD 2026 · Hawkins Edition</div>
+    <div class="ph-doc">Propuesta de Auspicio</div>
+    <div class="ph-page">01 / 04</div>
+  </div>
+
+  <div class="section-label">El evento</div>
+  <div class="section-title">La Fiesta de Disfraces más Grande<br>del Norte Argentino</div>
+
+  <div class="intro-box">
+    <p>La <strong>Fiesta de Disfraces FDD</strong> es el evento de entretenimiento temático más convocante de Santiago del Estero, con <strong>10 ediciones consecutivas</strong> y una comunidad de más de <strong>+5.000 personas por año</strong>. La edición 2026 eleva la propuesta a un nivel cinematográfico inédito en la región: una experiencia inmersiva inspirada en <strong>Stranger Things</strong>, con escenografía de portal interdimensional, efectos especiales, ambiente audiovisual de alta producción y la identidad visual más impactante de su historia.</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <span class="stat-num">+5.000</span>
+      <span class="stat-label">Asistentes por año</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">10ª</span>
+      <span class="stat-label">Edición consecutiva</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">31 Oct</span>
+      <span class="stat-label">Noche del evento</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">Sgo. Est.</span>
+      <span class="stat-label">Capital de provincia</span>
+    </div>
+  </div>
+
+  <div class="section-label">Perfil del público</div>
+  <div class="two-col" style="margin-bottom:16px">
+    <div class="col-box">
+      <div class="col-box-title">Demografía</div>
+      <ul class="benefit-list">
+        <li>Jóvenes entre 18 y 35 años</li>
+        <li>NSE medio, medio-alto y alto</li>
+        <li>Activos en redes sociales</li>
+        <li>Alto poder adquisitivo en entretenimiento</li>
+        <li>Influencers locales y creadores de contenido</li>
+        <li>Familias y grupos de amigos</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <div class="col-box-title">Comportamiento digital</div>
+      <ul class="benefit-list">
+        <li>Altamente compartible (UGC orgánico)</li>
+        <li>Engagement en Instagram, TikTok y WhatsApp</li>
+        <li>Generación masiva de contenido en el evento</li>
+        <li>Comunidad fidelizada desde hace 10 años</li>
+        <li>Alcance provincial y regional consolidado</li>
+        <li>Base de datos propia de +3.000 contactos</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-label">Contexto 2026</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">1</div>
+      <div class="tl-content">
+        <div class="tl-title">Concepto Stranger Things — Hawkins Edition</div>
+        <div class="tl-desc">Experiencia inmersiva inédita en la región. Portal interdimensional, efectos especiales, escenografía temática de alto impacto y producción audiovisual cinematográfica.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">2</div>
+      <div class="tl-content">
+        <div class="tl-title">Edición Aniversario N° 10</div>
+        <div class="tl-desc">Una década de evento ininterrumpido. La comunicación de campaña potencia el hito histórico, generando mayor cobertura mediática y alcance orgánico.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">3</div>
+      <div class="tl-content">
+        <div class="tl-title">Plataforma digital consolidada</div>
+        <div class="tl-desc">Sitio web oficial, WhatsApp marketing, redes sociales activas y campaña digital integrada desde el lanzamiento hasta el post-evento.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PÁGINA 2 — BENEFICIOS DE PUBLICIDAD
+════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="ph-logo">FDD 2026 · Hawkins Edition</div>
+    <div class="ph-doc">Propuesta de Auspicio</div>
+    <div class="ph-page">02 / 04</div>
+  </div>
+
+  <div class="section-label">Paquete publicitario completo</div>
+  <div class="section-title">Lo que incluye su Auspicio</div>
+
+  <div class="benefits-grid">
+
+    <div class="benefit-card">
+      <span class="benefit-icon">📱</span>
+      <div class="benefit-title">Presencia Digital Completa</div>
+      <ul class="benefit-list">
+        <li>Logo del auspiciante en el sitio web oficial del evento (banner destacado)</li>
+        <li>Mención en todas las publicaciones de redes sociales de la campaña</li>
+        <li>Story dedicada de presentación del auspiciante en Instagram y Facebook</li>
+        <li>Mención en mensajes masivos de WhatsApp Marketing a toda la base de contactos</li>
+        <li>Inclusión del logo en la firma de emails de comunicación masiva</li>
+        <li>Publicación de agradecimiento post-evento con métricas de alcance</li>
+      </ul>
+    </div>
+
+    <div class="benefit-card">
+      <span class="benefit-icon">🎪</span>
+      <div class="benefit-title">Presencia en el Evento</div>
+      <ul class="benefit-list">
+        <li>Banner y cartel con logo del auspiciante en entrada principal</li>
+        <li>Logo en backdrop oficial para fotos (alta exposición orgánica)</li>
+        <li>Mención en el sistema de audio durante el evento (3 menciones mínimo)</li>
+        <li>Logo en pantalla LED / proyecciones del evento</li>
+        <li>Stand o espacio de activación propio (a coordinar)</li>
+        <li>Presencia en escenografía temática de alto impacto visual</li>
+      </ul>
+    </div>
+
+    <div class="benefit-card">
+      <span class="benefit-icon">🖨️</span>
+      <div class="benefit-title">Material Gráfico Impreso</div>
+      <ul class="benefit-list">
+        <li>Logo en flyers y afiches de difusión (distribución física y digital)</li>
+        <li>Logo en entradas físicas y/o digitales del evento</li>
+        <li>Inclusión en programa/guía del evento</li>
+        <li>Logo en banners roll-up del venue</li>
+        <li>Material de branding co-branded (wristbands, bolsas, etc.)</li>
+        <li>Piezas gráficas personalizadas para redes del auspiciante</li>
+      </ul>
+    </div>
+
+    <div class="benefit-card">
+      <span class="benefit-icon">🎬</span>
+      <div class="benefit-title">Contenido Audiovisual</div>
+      <ul class="benefit-list">
+        <li>Mención en video teaser oficial de lanzamiento del evento</li>
+        <li>Logo incluido en aftermovie / video resumen post-evento</li>
+        <li>Reels de difusión con mención del auspiciante</li>
+        <li>Cobertura fotográfica profesional con presencia de marca</li>
+        <li>Lives en redes con mención del auspiciante</li>
+        <li>Archivo del material audiovisual para uso libre del auspiciante</li>
+      </ul>
+    </div>
+
+    <div class="benefit-card">
+      <span class="benefit-icon">🏆</span>
+      <div class="benefit-title">Concurso de Disfraces</div>
+      <ul class="benefit-list">
+        <li>Categoría de premiación con el nombre del auspiciante</li>
+        <li>Presentación del auspiciante en la entrega de premios</li>
+        <li>Mención especial como "Auspiciante Oficial" en toda comunicación</li>
+        <li>Presencia en el jurado (opcional, a convenir)</li>
+        <li>Foto oficial de premiación con representante de la empresa</li>
+        <li>Difusión de ganadores con identidad del auspiciante</li>
+      </ul>
+    </div>
+
+    <div class="benefit-card">
+      <span class="benefit-icon">📊</span>
+      <div class="benefit-title">Reportes y Métricas</div>
+      <ul class="benefit-list">
+        <li>Informe de alcance digital pre-evento con estadísticas</li>
+        <li>Reporte de impacto del evento: asistentes, impresiones, interacciones</li>
+        <li>Capturas y evidencia de todas las menciones publicadas</li>
+        <li>Análisis de visibilidad de marca durante la campaña</li>
+        <li>Informe fotográfico de presencia en venue</li>
+        <li>Resumen ejecutivo post-evento con resultados medibles</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="note-box">
+    <p>⚡ <strong>Bonus exclusivo para Auspiciante Principal:</strong> Acceso anticipado a la base de datos del evento para acciones de marketing propias del auspiciante, coordinadas con el equipo de FDD. Se garantiza exclusividad de categoría (sin competencia directa en el mismo rubro durante el evento).</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PÁGINA 3 — ACOMPAÑAMIENTO TECNOLÓGICO
+════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="ph-logo">FDD 2026 · Hawkins Edition</div>
+    <div class="ph-doc">Acompañamiento Tecnológico</div>
+    <div class="ph-page">03 / 04</div>
+  </div>
+
+  <div class="section-label">Fusión IA — Fuego Creativo</div>
+  <div class="section-title">Acompañamiento Tecnológico<br>para su Empresa <span class="badge">Incluido en el paquete</span></div>
+
+  <div class="intro-box" style="margin-bottom:18px">
+    <p>Adicionalmente al auspicio del evento, ofrecemos a la empresa auspiciante un <strong>servicio de acompañamiento tecnológico integral</strong> desarrollado por nuestro equipo de <strong>Fusión IA - Fuego Creativo</strong>. Potenciamos su presencia digital, modernizamos sus procesos de comunicación y colocamos la tecnología al servicio directo de su negocio. Todo incluido en la misma inversión.</p>
+  </div>
+
+  <div class="tech-grid">
+
+    <div class="tech-card">
+      <span class="tech-card-icon">🌐</span>
+      <div class="tech-card-title">Presencia Web</div>
+      <ul class="tech-card-list">
+        <li>Diseño o rediseño de landing page empresarial</li>
+        <li>Sitio mobile-first responsivo</li>
+        <li>Optimización SEO básica</li>
+        <li>Integración de formularios y contacto</li>
+        <li>Velocidad y performance optimizados</li>
+        <li>Dominio y hosting por 6 meses</li>
+      </ul>
+    </div>
+
+    <div class="tech-card">
+      <span class="tech-card-icon">🤖</span>
+      <div class="tech-card-title">Automatización IA</div>
+      <ul class="tech-card-list">
+        <li>Chatbot de atención por WhatsApp Business</li>
+        <li>Respuestas automáticas inteligentes 24/7</li>
+        <li>Flujos de conversación personalizados</li>
+        <li>Captación y calificación de leads automática</li>
+        <li>Notificaciones automáticas a clientes</li>
+        <li>Panel de control y estadísticas</li>
+      </ul>
+    </div>
+
+    <div class="tech-card">
+      <span class="tech-card-icon">📣</span>
+      <div class="tech-card-title">Marketing Digital</div>
+      <ul class="tech-card-list">
+        <li>Estrategia de contenido para RRSS (1 mes)</li>
+        <li>Diseño de piezas gráficas digitales (pack 10)</li>
+        <li>Configuración de Meta Business Suite</li>
+        <li>Campaña de difusión co-branded con FDD</li>
+        <li>Email marketing (1 campaña)</li>
+        <li>Reporte de resultados mensual</li>
+      </ul>
+    </div>
+
+    <div class="tech-card">
+      <span class="tech-card-icon">📱</span>
+      <div class="tech-card-title">Redes Sociales</div>
+      <ul class="tech-card-list">
+        <li>Auditoría y optimización de perfiles</li>
+        <li>Creación de identidad visual unificada</li>
+        <li>Pack de plantillas editables Canva Pro</li>
+        <li>Guía de tono y comunicación de marca</li>
+        <li>Stories highlights y portadas personalizadas</li>
+        <li>Configuración de catálogo digital (si aplica)</li>
+      </ul>
+    </div>
+
+    <div class="tech-card">
+      <span class="tech-card-icon">📊</span>
+      <div class="tech-card-title">Analítica y Datos</div>
+      <ul class="tech-card-list">
+        <li>Configuración de Google Analytics / Meta Pixel</li>
+        <li>Dashboard de métricas personalizado</li>
+        <li>Reporte mensual de rendimiento digital</li>
+        <li>Análisis de audiencia y comportamiento</li>
+        <li>Recomendaciones de mejora continua</li>
+        <li>Consultoría estratégica (1 sesión mensual)</li>
+      </ul>
+    </div>
+
+    <div class="tech-card">
+      <span class="tech-card-icon">🎨</span>
+      <div class="tech-card-title">Identidad Visual</div>
+      <ul class="tech-card-list">
+        <li>Revisión / creación de manual de marca</li>
+        <li>Adaptación de logo para entornos digitales</li>
+        <li>Pack de firmas de email profesionales</li>
+        <li>Material co-branded para el evento</li>
+        <li>Creatividades para campañas de temporada</li>
+        <li>Entrega de archivos editables y fuentes</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="note-box" style="border-color:#3b82f6;background:#eff6ff">
+    <p style="color:#1e40af">💡 <strong>Duración del acompañamiento tecnológico:</strong> 3 meses desde la firma del acuerdo, con opción de renovación. El servicio tecnológico es complementario al auspicio del evento y está valorizado de forma independiente en <strong>$1.800.000</strong>, incluido sin costo adicional en el paquete total.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PÁGINA 4 — INVERSIÓN Y CIERRE
+════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="ph-logo">FDD 2026 · Hawkins Edition</div>
+    <div class="ph-doc">Inversión y Condiciones</div>
+    <div class="ph-page">04 / 04</div>
+  </div>
+
+  <div class="section-label">Resumen de inversión</div>
+  <div class="section-title">Desglose del Paquete Completo</div>
+
+  <table class="price-table">
+    <thead>
+      <tr>
+        <th style="width:50%">Componente</th>
+        <th>Descripción</th>
+        <th style="text-align:right">Valor referencial</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Auspicio Principal del Evento</strong> <span class="price-tag">EXCLUSIVO</span></td>
+        <td>Presencia en todas las comunicaciones y el venue</td>
+        <td style="text-align:right">$2.500.000</td>
+      </tr>
+      <tr>
+        <td><strong>Campaña Publicitaria Digital</strong></td>
+        <td>RRSS, WhatsApp, web, email + material gráfico</td>
+        <td style="text-align:right">$700.000</td>
+      </tr>
+      <tr>
+        <td><strong>Presencia en Venue y Producción</strong></td>
+        <td>Banners, backdrop, pantallas, audio, stand</td>
+        <td style="text-align:right">$600.000</td>
+      </tr>
+      <tr>
+        <td><strong>Contenido Audiovisual</strong></td>
+        <td>Teaser, aftermovie, reels, cobertura fotográfica</td>
+        <td style="text-align:right">$400.000</td>
+      </tr>
+      <tr>
+        <td><strong>Acompañamiento Tecnológico — 3 meses</strong></td>
+        <td>Web, IA, marketing digital, analítica, identidad</td>
+        <td style="text-align:right;color:#16a34a"><strong>$1.800.000 <span style="font-size:8px;color:#16a34a">INCLUIDO</span></strong></td>
+      </tr>
+      <tr class="total-row">
+        <td colspan="2"><strong>INVERSIÓN TOTAL DEL PAQUETE</strong> <span style="font-size:8px;opacity:.7;font-weight:400">· Precio final sin cargos ocultos</span></td>
+        <td style="text-align:right"><strong>$5.000.000</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <div class="hl-label">Inversión Total — Pesos Argentinos</div>
+    <div class="hl-price">$5.000.000</div>
+    <div class="hl-sub">Incluye Auspicio Completo + Acompañamiento Tecnológico 3 meses</div>
+  </div>
+
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-box-title">Condiciones de pago</div>
+      <ul class="benefit-list">
+        <li>50% al momento de firma del acuerdo</li>
+        <li>50% restante 30 días antes del evento</li>
+        <li>Posibilidad de financiación en 3 cuotas (consultar)</li>
+        <li>Transferencia bancaria / CBU / MercadoPago</li>
+        <li>Facturación A o B según corresponda</li>
+        <li>Propuesta válida por 15 días corridos</li>
+      </ul>
+    </div>
+    <div class="col-box">
+      <div class="col-box-title">Garantías incluidas</div>
+      <ul class="benefit-list">
+        <li>Contrato formal con detalle de todas las prestaciones</li>
+        <li>Exclusividad de categoría garantizada por escrito</li>
+        <li>Informes de cumplimiento de cada entregable</li>
+        <li>Acompañamiento personalizado durante toda la campaña</li>
+        <li>Acceso a canal directo de comunicación con el equipo</li>
+        <li>Devolución proporcional si no se cumple algún ítem</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <div class="cta-title">¿Listo para ser parte de la 10ª Edición?</div>
+    <div class="cta-sub">Estamos disponibles para reunirnos, ampliar información y ajustar la propuesta a las necesidades específicas de su empresa.<br>Los cupos de auspicio son limitados. Garantice su lugar antes del 30 de junio de 2026.</div>
+    <div class="cta-contacts">
+      <div class="cta-contact">
+        <strong>WhatsApp directo</strong>
+        +54 385 578-9996
+      </div>
+      <div class="cta-contact">
+        <strong>Evento</strong>
+        31 de Octubre · 2026 · 22:00 hs
+      </div>
+      <div class="cta-contact">
+        <strong>Lugar</strong>
+        Santiago del Estero, Argentina
+      </div>
+    </div>
+  </div>
+
+  <div class="firma-section">
+    <div class="firma-box">
+      <div class="firma-label">Firma y aclaración — Auspiciante</div>
+      <div class="firma-name">_________________________________</div>
+      <div class="firma-role">Representante Legal / Autorizado</div>
+    </div>
+    <div class="firma-box">
+      <div class="firma-label">Firma y aclaración — FDD / Fusión IA</div>
+      <div class="firma-name">_________________________________</div>
+      <div class="firma-role">Organización Fiesta de Disfraces 2026</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
