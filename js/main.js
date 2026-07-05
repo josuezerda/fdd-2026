@@ -43,12 +43,34 @@ function startMusic(){
 }
 
 // ======= SPLASH =======
-function enterSite(){
-  startMusic();
-  document.getElementById('splash').classList.add('hidden');
-  document.body.style.overflow='auto';
+window.enterSite = function(){
+  try {
+    startMusic();
+  } catch(e) {
+    console.error("Music error:", e);
+  }
+  
+  try {
+    const splash = document.getElementById('splash');
+    if (splash) {
+      splash.style.display = 'none';
+      splash.classList.add('hidden');
+    }
+    document.body.style.overflow = 'auto';
+  } catch(e) {
+    console.error("Splash error:", e);
+    alert("Hubo un error cargando la página. Por favor, recarga.");
+  }
 }
 document.body.style.overflow='hidden';
+
+// Forzar la asociación del evento por las dudas
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('splash-btn');
+  if (btn) {
+    btn.addEventListener('click', window.enterSite);
+  }
+});
 
 // ======= TYPEWRITER STORY =======
 const storyFull = `Bajo las calles más antiguas de Argentina, en Santiago del Estero — la Madre de Ciudades — existe una red de túneles que nadie termina de mapear. Los colonizadores los construyeron en 1553. Dicen que van más allá de la Plaza Libertad, que serpentean bajo el Río Dulce, que sus paredes respiran.
