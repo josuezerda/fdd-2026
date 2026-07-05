@@ -1,9 +1,15 @@
 const SUPABASE_URL = 'https://rhdstfwxovfvuaggjduo.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_-wvcuqUEVKiy2aGJ1Bri8Q_6M6KUAu-';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let supabase = null;
+if (window.supabase) {
+  supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+} else {
+  console.warn('Supabase JS client not found (network block?)');
+}
 
 // ======= CHECK BLOCKER =======
 async function checkBlocker() {
+  if (!supabase) return;
   try {
     const { data, error } = await supabase.from('site_settings').select('is_active').eq('id', 1).single();
     if (data && !data.is_active) {
@@ -260,6 +266,11 @@ document.addEventListener('keydown',e=>{
 // ======= FORM =======
 document.getElementById('fdd-form').addEventListener('submit', async function(e){
   e.preventDefault();
+  
+  if (!supabase) {
+    alert('Sistema fuera de línea por favor intenta de nuevo.');
+    return;
+  }
   
   const form = this;
   const inputs = form.querySelectorAll('input, select, textarea');
