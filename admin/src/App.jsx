@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from './supabaseClient'
-import { Settings, Users, MessageSquare, Activity, ShieldAlert, Power } from 'lucide-react'
+import { Settings, Users, MessageSquare, Activity, ShieldAlert, Power, Image as ImageIcon, Trash2, UploadCloud } from 'lucide-react'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -13,10 +13,77 @@ function App() {
   const [activeTab, setActiveTab] = useState('dashboard')
   const [users, setUsers] = useState([])
 
+  const [galleryImages, setGalleryImages] = useState([])
+  const [uploadingImage, setUploadingImage] = useState(false)
+
   useEffect(() => {
     fetchSettings()
     fetchUsers()
+    fetchGallery()
   }, [])
+
+  const fetchGallery = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('gallery_images')
+        .select('*')
+        .order('id', { ascending: true })
+      
+      if (error) throw error
+      if (data) setGalleryImages(data)
+    } catch (error) {
+      console.error('Error fetching gallery:', error)
+    }
+  }
+
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    setUploadingImage(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `public/${fileName}`;
+      
+      const { error: uploadError } = await supabase.storage
+        .from('gallery')
+        .upload(filePath, file);
+        
+      if (uploadError) throw uploadError;
+      
+      const { data: urlData } = supabase.storage
+        .from('gallery')
+        .getPublicUrl(filePath);
+        
+      const { error: dbError } = await supabase
+        .from('gallery_images')
+        .insert([{ url: urlData.publicUrl }]);
+        
+      if (dbError) throw dbError;
+      
+      fetchGallery();
+      alert("Imagen subida con éxito");
+    } catch (error) {
+      console.error(error);
+      alert("Error al subir la imagen");
+    } finally {
+      setUploadingImage(false);
+      event.target.value = null;
+    }
+  };
+
+  const handleDeleteImage = async (id, url) => {
+    if (!confirm('¿Seguro que deseas eliminar esta imagen de la galería pública?')) return;
+    try {
+      const { error } = await supabase.from('gallery_images').delete().eq('id', id);
+      if (error) throw error;
+      fetchGallery();
+    } catch (e) {
+      console.error(e);
+      alert("Error al eliminar");
+    }
+  };
 
   const fetchSettings = async () => {
     try {
@@ -187,11 +254,20 @@ function App() {
           >
             <Users size={18} /> Agentes Registrados
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('campaigns')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${activeTab === 'campaigns' ? 'bg-primary/10 text-primary font-semibold border border-primary/20' : 'hover:bg-textHover text-textMuted'}`}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${activeTab === 'campaigns' ? 'bg-red-500/10 text-red-600 font-medium' : 'text-gray-600 hover:bg-gray-100'}`}
           >
-            <MessageSquare size={18} /> Campañas WhatsApp
+            <MessageSquare size={20} />
+            Campañas
+          </button>
+
+          <button
+            onClick={() => setActiveTab('gallery')}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${activeTab === 'gallery' ? 'bg-red-500/10 text-red-600 font-medium' : 'text-gray-600 hover:bg-gray-100'}`}
+          >
+            <ImageIcon size={20} />
+            Galería Web
           </button>
         </nav>
       </div>
@@ -274,44 +350,80 @@ function App() {
               </div>
             )}
 
-            {activeTab === 'campaigns' && (
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-textMain mb-6">Campañas Masivas de WhatsApp</h2>
-                <div className="p-8 border border-border bg-surface shadow-sm rounded-lg">
-                  <h3 className="text-xl font-semibold text-textMain mb-4">Nueva Campaña</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm text-primary uppercase tracking-widest mb-2 font-medium">Mensaje</label>
-                      <textarea 
-                        className="w-full bg-background border border-border rounded-lg p-4 text-textMain focus:border-primary focus:ring-1 focus:ring-primary outline-none h-32 resize-none transition-all"
-                        placeholder="Escribe el mensaje que enviará el bot..."
-                        value={campaignMessage}
-                        onChange={(e) => setCampaignMessage(e.target.value)}
-                      ></textarea>
-                    </div>
-                    <div>
-                      <label className="block text-sm text-primary uppercase tracking-widest mb-2 font-medium">Audiencia</label>
-                      <select 
-                        className="w-full bg-background border border-border rounded-lg p-4 text-textMain focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                        value={campaignAudience}
-                        onChange={(e) => setCampaignAudience(e.target.value)}
-                      >
-                        <option value="all">Todos los agentes registrados</option>
-                        <option value="vip">Agentes VIP</option>
-                        <option value="valid_phone">Sólo teléfonos válidos (+54)</option>
-                      </select>
-                    </div>
-                    <button 
-                      onClick={sendCampaign}
-                      disabled={sendingCampaign}
-                      className="bg-primary hover:bg-primaryNeon text-white font-bold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all uppercase tracking-widest text-sm disabled:opacity-50"
-                    >
-                      {sendingCampaign ? 'Enviando...' : 'Iniciar Transmisión 🚀'}
-                    </button>
-                  </div>
+          {/* Pestaña Campañas */}
+          {activeTab === 'campaigns' && (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in">
+              <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <MessageSquare className="text-red-600" />
+                Transmisión Masiva
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Mensaje Oficial</label>
+                  <textarea
+                    value={campaignMessage}
+                    onChange={(e) => setCampaignMessage(e.target.value)}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 text-gray-900 h-32 focus:ring-2 focus:ring-red-500 outline-none"
+                    placeholder="Escribe el comunicado para los sujetos de prueba..."
+                  ></textarea>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Destinatarios</label>
+                  <select
+                    value={campaignAudience}
+                    onChange={(e) => setCampaignAudience(e.target.value)}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 text-gray-900 focus:ring-2 focus:ring-red-500 outline-none"
+                  >
+                    <option value="all">Todos los Registrados ({users.length})</option>
+                    <option value="test">Solo de Prueba (Admin)</option>
+                  </select>
+                </div>
+                <button
+                  onClick={sendCampaign}
+                  disabled={sendingCampaign}
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
+                  {sendingCampaign ? <Activity className="animate-spin" /> : <MessageSquare />}
+                  {sendingCampaign ? 'Enviando Comunicado...' : 'Ejecutar Transmisión'}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Pestaña Galería */}
+          {activeTab === 'gallery' && (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                  <ImageIcon className="text-red-600" />
+                  Gestión de Galería (Home)
+                </h2>
+                <div className="relative">
+                  <input type="file" accept="image/*" onChange={handleFileUpload} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" disabled={uploadingImage} />
+                  <button className="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+                    {uploadingImage ? <Activity size={18} className="animate-spin" /> : <UploadCloud size={18} />}
+                    {uploadingImage ? 'Subiendo...' : 'Subir Foto'}
+                  </button>
                 </div>
               </div>
-            )}
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {galleryImages.map(img => (
+                  <div key={img.id} className="relative group rounded-lg overflow-hidden border border-gray-200 bg-gray-50 aspect-square">
+                    <img src={img.url} alt="Gallery" className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                    <button onClick={() => handleDeleteImage(img.id, img.url)} className="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 shadow-md">
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                ))}
+                {galleryImages.length === 0 && (
+                  <div className="col-span-full py-10 text-center text-gray-500">
+                    No hay imágenes en la galería. Sube la primera foto.
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
           </>
         )}
       </div>

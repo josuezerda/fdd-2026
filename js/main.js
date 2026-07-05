@@ -269,7 +269,7 @@ function closeModal(){document.getElementById('modal').classList.remove('open')}
 function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal()}
 
 // ======= LIGHTBOX =======
-const lbImgs=['fotos/26102019-0L4A3971.jpg','fotos/26102019-IMG_3886.jpg','fotos/26102019-IMG_3959.jpg','fotos/26102019-IMG_3965.jpg','fotos/26102019-IMG_3968.jpg','fotos/26102019-IMG_3971.jpg','fotos/26102019-IMG_4000.jpg','fotos/26102019-IMG_4022.jpg','fotos/26102019-IMG_4034.jpg','fotos/26102019-IMG_4095.jpg','fotos/26102019-IMG_4122.jpg','fotos/26102019-IMG_4144.jpg','fotos/26102019-IMG_4171.jpg'];
+let lbImgs=[];
 let lbCur=0;
 function openLightbox(i){lbCur=i;document.getElementById('lb-img').src=lbImgs[i];document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden'}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='auto'}
@@ -323,3 +323,31 @@ document.getElementById('fdd-form').addEventListener('submit', async function(e)
     submitBtn.disabled = false;
   }
 });
+
+// ======= GALERIA DINAMICA =======
+async function fetchGallery() {
+  if (!supabaseClient) return;
+  try {
+    const { data, error } = await supabaseClient.from('gallery_images').select('*').order('id', { ascending: true });
+    if (error) throw error;
+    if (data) {
+      lbImgs = data.map(img => img.url);
+      window.lbImgs = lbImgs; // Ensure global access just in case
+      const grid = document.getElementById('galeria-grid');
+      if (grid) {
+        if (data.length === 0) {
+          grid.innerHTML = '<p style="color: var(--text-dim); text-align: center; width: 100%;">Los registros están vacíos...</p>';
+        } else {
+          grid.innerHTML = data.map((img, i) => `
+            <div class="galeria-item reveal" onclick="openLightbox(${i})" style="opacity: 1; transform: none;">
+              <img src="${img.url}" alt="FDD foto ${i+1}" loading="lazy">
+            </div>
+          `).join('');
+        }
+      }
+    }
+  } catch (e) {
+    console.error('Error cargando galería:', e);
+  }
+}
+fetchGallery();

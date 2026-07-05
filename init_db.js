@@ -13,7 +13,7 @@ async function main() {
         await client.connect();
         console.log('Connected to Supabase DB');
         
-        const schema = fs.readFileSync('schema.sql', 'utf8');
+        const schema = fs.readFileSync('schema_gallery.sql', 'utf8');
         await client.query(schema);
         
         console.log('Schema created successfully');
