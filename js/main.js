@@ -1,17 +1,17 @@
 const SUPABASE_URL = 'https://rhdstfwxovfvuaggjduo.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_-wvcuqUEVKiy2aGJ1Bri8Q_6M6KUAu-';
-let supabase = null;
+let supabaseClient = null;
 if (window.supabase) {
-  supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 } else {
   console.warn('Supabase JS client not found (network block?)');
 }
 
 // ======= CHECK BLOCKER =======
 async function checkBlocker() {
-  if (!supabase) return;
+  if (!supabaseClient) return;
   try {
-    const { data, error } = await supabase.from('site_settings').select('is_active').eq('id', 1).single();
+    const { data, error } = await supabaseClient.from('site_settings').select('is_active').eq('id', 1).single();
     if (data && !data.is_active) {
       document.getElementById('site-blocker').style.display = 'flex';
       document.body.style.overflow = 'hidden';
@@ -289,7 +289,7 @@ document.addEventListener('keydown',e=>{
 document.getElementById('fdd-form').addEventListener('submit', async function(e){
   e.preventDefault();
   
-  if (!supabase) {
+  if (!supabaseClient) {
     alert('Sistema fuera de línea por favor intenta de nuevo.');
     return;
   }
@@ -302,7 +302,7 @@ document.getElementById('fdd-form').addEventListener('submit', async function(e)
   submitBtn.innerHTML = '⚡ TRANSMITIENDO...';
   submitBtn.disabled = true;
 
-  const data = {
+  const payload = {
     name: inputs[0].value,
     email: inputs[1].value,
     phone: inputs[2].value,
@@ -311,7 +311,7 @@ document.getElementById('fdd-form').addEventListener('submit', async function(e)
   };
 
   try {
-    const { error } = await supabase.from('users_leads').insert([data]);
+    const { error } = await supabaseClient.from('users_leads').insert([payload]);
     if (error) throw error;
     
     form.style.display='none';
