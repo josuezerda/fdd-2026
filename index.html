@@ -1,127 +1,333 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fiesta de Disfraces 2026 · Hawkins Edition</title>
-  <meta name="description" content="Fiesta de Disfraces 2026 · Hawkins Edition — Santiago del Estero. La mejor fiesta del año. Entradas, traslados y más.">
-  <link rel="icon" type="image/png" href="logo-st.png">
-  <link rel="apple-touch-icon" href="logo-st.png">
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FDD 2026 — Fiesta de Disfraces · Hawkins Edition</title>
+<meta name="description" content="La fiesta de disfraces más inmersiva del año. FDD 2026 — El portal se abre el 31 de octubre. ¿Te animás a entrar al Upside Down?">
+<link rel="icon" type="image/png" href="logo-st.png">
+<link rel="apple-touch-icon" href="logo-st.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <!-- EFECTOS DE FONDO -->
-  <div id="particles" aria-hidden="true"></div>
-  <div class="scanline" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
-  <div id="lightning" aria-hidden="true"><div id="lglow"></div></div>
 
-  <!-- NAVEGACIÓN -->
-  <nav class="navbar" aria-label="Navegación principal">
-    <ul>
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#about">Información</a></li>
-      <li><a href="#tickets">Entradas</a></li>
-      <li><a href="#faq">Preguntas</a></li>
-    </ul>
-  </nav>
+<!-- ========== SITE BLOCKER ========== -->
+<div id="site-blocker" style="display:none; position:fixed; inset:0; background:#020005; z-index:99999; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px;">
+  <img src="logo-st.png" alt="FDD" style="width:150px; filter:drop-shadow(0 0 20px #c41e3a); margin-bottom:30px; animation:portal-pulse 3s infinite;">
+  <h1 style="font-family:'Cinzel Decorative', serif; color:#fff; font-size:2rem; text-shadow:0 0 20px #c41e3a; margin-bottom:10px;">PORTAL EN CALIBRACIÓN</h1>
+  <p style="font-family:'Special Elite', cursive; color:rgba(220,200,230,0.8); font-size:1rem; letter-spacing:0.1em; max-width:500px; line-height:1.6;">El acceso al Upside Down está temporalmente restringido por los agentes del Laboratorio Hawkins.<br><br>Volveremos a abrir muy pronto.</p>
+</div>
 
-  <main>
-    <!-- HERO SECTION -->
-    <section id="inicio" class="hero" aria-labelledby="hero-title">
-      <h1 id="hero-title" class="sr-only">Fiesta de Disfraces 2026 - Hawkins Edition</h1>
-      <img class="logo-img" src="logo-st.png" alt="Fiesta de Disfraces 2026 Logo">
-      <div class="classified" aria-hidden="true">⚠ &nbsp; Acceso Clasificado — Hawkins Lab &nbsp; ⚠</div>
-    </section>
-
-    <!-- ABOUT SECTION -->
-    <section id="about" aria-labelledby="about-title">
-      <h2 id="about-title" class="section-title">El Evento</h2>
-      <div class="about-content">
-        <p>Bienvenidos a la edición más misteriosa de la <span class="highlight">Fiesta de Disfraces</span>. Este año, Santiago del Estero se convierte en Hawkins.</p>
-        <p>Prepárate para una noche llena de sorpresas, la mejor música, y premios espectaculares al mejor disfraz. ¿Estás listo para entrar al Upside Down?</p>
-        <p><strong>📍 Ubicación:</strong> Predio Ferial Santiago del Estero</p>
-        <p><strong>📅 Fecha:</strong> ¡Próximamente...</p>
+<!-- ========== SPLASH ========== -->
+<div id="splash">
+  <div class="splash-scan"></div>
+  <div class="splash-static"></div>
+  <div id="splash-particles"></div>
+  <div style="text-align:center;position:relative;z-index:2">
+    <p class="splash-alert">⚠ ALERTA DIMENSIONAL — HAWKINS LAB ⚠</p>
+    <div class="portal-wrap">
+      <div class="portal">
+        <div class="portal-ring1"></div>
+        <div class="portal-ring2"></div>
+        <div class="portal-ring3"></div>
+        <img class="portal-logo" src="logo-st.png" alt="FDD 2026">
       </div>
-    </section>
+    </div>
+    <h1 class="splash-title">FIESTA DE<br>DISFRACES</h1>
+    <p class="splash-sub">2026 · Hawkins Edition</p>
 
-    <!-- TICKETS SECTION -->
-    <section id="tickets" aria-labelledby="tickets-title">
-      <h2 id="tickets-title" class="section-title">Acceso al Laboratorio</h2>
-      <div class="tickets-grid">
-        <article class="ticket-card">
-          <h3>Fase 1: Sujetos de Prueba</h3>
-          <div class="ticket-price">$15.000</div>
-          <p class="ticket-desc">Acceso general al evento. Stock limitado para los primeros valientes.</p>
-          <a href="https://wa.me/5493855789996?text=Hola,%20quiero%20comprar%20una%20entrada%20Fase%201" target="_blank" class="btn-buy" aria-label="Comprar entrada Fase 1">Comprar</a>
-        </article>
-        <article class="ticket-card">
-          <h3>Fase 2: Residentes de Hawkins</h3>
-          <div class="ticket-price">$20.000</div>
-          <p class="ticket-desc">Acceso general. Venta regular una vez agotada la Fase 1.</p>
-          <a href="#" class="btn-buy" style="background:#555; pointer-events:none;" aria-label="Comprar entrada Fase 2">Próximamente</a>
-        </article>
-        <article class="ticket-card">
-          <h3>Pase Hellfire Club (VIP)</h3>
-          <div class="ticket-price">$40.000</div>
-          <p class="ticket-desc">Ingreso sin fila, sector exclusivo con barra propia, baños VIP y vista preferencial.</p>
-          <a href="https://wa.me/5493855789996?text=Hola,%20quiero%20comprar%20un%20Pase%20VIP" target="_blank" class="btn-buy" aria-label="Comprar entrada VIP">Comprar VIP</a>
-        </article>
-      </div>
-    </section>
+    <!-- HISTORIA INTRO -->
+    <div class="splash-story" id="splash-story">
+      <p class="story-line">► TRANSMISIÓN INTERCEPTADA — ORIGEN: SANTIAGO DEL ESTERO, ARGENTINA</p>
+      <p class="story-text" id="story-text"></p>
+    </div>
 
-    <!-- FAQ SECTION -->
-    <section id="faq" aria-labelledby="faq-title">
-      <h2 id="faq-title" class="section-title">Archivos Clasificados (FAQ)</h2>
-      <div class="faq-container">
-        
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-1">
-            <span>¿Dónde y cuándo será la fiesta?</span>
-            <span class="faq-icon" aria-hidden="true">+</span>
-          </button>
-          <div id="faq-ans-1" class="faq-answer" aria-hidden="true">
-            <p>La fiesta se realizará el 31 de Octubre de 2026 en el Predio Ferial de Santiago del Estero. Las puertas abren a las 22:00 hs.</p>
-          </div>
-        </div>
+    <button class="splash-enter" id="splash-btn" onclick="enterSite()">⚡ INGRESAR AL UPSIDE DOWN ⚡</button>
+    <p class="splash-warning">// SE RECOMIENDA DISCRECIÓN — NIVEL DE PELIGRO: MÁXIMO //</p>
+  </div>
+</div>
 
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-2">
-            <span>¿Es obligatorio ir disfrazado?</span>
-            <span class="faq-icon" aria-hidden="true">+</span>
-          </button>
-          <div id="faq-ans-2" class="faq-answer" aria-hidden="true">
-            <p>¡Sí! Es una fiesta de disfraces, la magia de la noche está en la participación de todos. Además, habrá grandes premios en diferentes categorías.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-3">
-            <span>¿Habrá transporte o traslados oficiales?</span>
-            <span class="faq-icon" aria-hidden="true">+</span>
-          </button>
-          <div id="faq-ans-3" class="faq-answer" aria-hidden="true">
-            <p>Sí, contaremos con colectivos oficiales saliendo desde distintos puntos estratégicos de la ciudad. Puedes consultar con nuestro Bot de WhatsApp para más detalles y reservas.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  </main>
-
-  <!-- BOTÓN FLOTANTE WHATSAPP -->
-  <a href="https://wa.me/5493855789996" class="whatsapp-float" target="_blank" aria-label="Asistente de WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
-      <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-    </svg>
+<!-- ========== NAV ========== -->
+<nav>
+  <a href="#hero" class="nav-brand">
+    <img src="logo-st.png" alt="FDD">
+    <div class="nav-brand-text">
+      <span class="nav-brand-label">Laboratorio Hawkins</span>
+      <span class="nav-brand-name">FDD 2026</span>
+    </div>
   </a>
+  <ul class="nav-links">
+    <li><a href="#countdown">El Portal</a></li>
+    <li><a href="#sobre">El Incidente</a></li>
+    <li><a href="#premios">Misiones</a></li>
+    <li><a href="#categorias">Personajes</a></li>
+    <li><a href="#galeria">Archivos</a></li>
+    <li><a href="#registro">Agentes</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px">
+    <button class="nav-badge" onclick="openModal()">ACCESO CLASIFICADO</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#countdown" onclick="closeMenu()">El Portal</a>
+  <a href="#sobre" onclick="closeMenu()">El Incidente</a>
+  <a href="#premios" onclick="closeMenu()">Misiones</a>
+  <a href="#categorias" onclick="closeMenu()">Personajes</a>
+  <a href="#galeria" onclick="closeMenu()">Archivos</a>
+  <a href="#registro" onclick="closeMenu()">Agentes</a>
+  <button class="mobile-badge" onclick="closeMenu();openModal()">ACCESO CLASIFICADO</button>
+</div>
 
-  <footer class="site-footer">
-    <div>Fiesta de Disfraces 2026 · Santiago del Estero</div>
-    <div>Desarrollado por <span>Fusión IA - Fuego Creativo</span></div>
-  </footer>
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div id="hero-particles"></div>
+  <!-- Rayos rojos -->
+  <div class="lightning-container" id="lightning-container">
+    <div class="lightning-glow" id="lightning-glow"></div>
+  </div>
+  <div style="position:relative;z-index:2;text-align:center">
+    <p class="hero-badge reveal">HAWKINS · INDIANA · OCTUBRE 31</p>
+    <div class="hero-year reveal">EDICIÓN 2026</div>
+    <h2 class="hero-title reveal glitch-text" data-text="FIESTA DE DISFRACES">FIESTA DE DISFRACES</h2>
+    <p class="hero-subtitle reveal">El portal se abre · ¿Entrás al Upside Down?</p>
+    <div class="hero-btns reveal">
+      <button class="btn-red" onclick="openModal()">🎟 CONSEGUIR ACCESO</button>
+      <button class="btn-blue" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">📋 REGISTRAR AGENTE</button>
+    </div>
+    <div class="hero-scroll">EXPLORAR</div>
+  </div>
+</section>
 
-  <script src="js/main.js" defer></script>
+<!-- ========== COUNTDOWN ========== -->
+<section id="countdown">
+  <p class="cd-label">⚡ EL PORTAL SE ABRE EN... ⚡</p>
+  <div class="cd-grid">
+    <div class="cd-item card reveal">
+      <span class="cd-num" id="cd-days">---</span>
+      <span class="cd-unit">Días</span>
+    </div>
+    <div class="cd-item card reveal">
+      <span class="cd-num" id="cd-hours">--</span>
+      <span class="cd-unit">Horas</span>
+    </div>
+    <div class="cd-item card reveal">
+      <span class="cd-num" id="cd-mins">--</span>
+      <span class="cd-unit">Minutos</span>
+    </div>
+    <div class="cd-item card reveal">
+      <span class="cd-num" id="cd-secs">--</span>
+      <span class="cd-unit">Segundos</span>
+    </div>
+  </div>
+  <p style="margin-top:28px;font-family:'Special Elite',cursive;font-size:.75rem;color:var(--text-dim);letter-spacing:.15em">31 DE OCTUBRE · 2026 · 22:00 HS</p>
+</section>
+
+<!-- ========== SOBRE / EL INCIDENTE ========== -->
+<section id="sobre">
+  <div class="sobre-img-wrap reveal">
+    <div class="sobre-img-inner">
+      <img class="sobre-logo" src="logo-st.png" alt="FDD 2026">
+    </div>
+    <div class="xmas-lights">
+      <div class="xmas-bulb"></div><div class="xmas-bulb"></div><div class="xmas-bulb"></div>
+      <div class="xmas-bulb"></div><div class="xmas-bulb"></div><div class="xmas-bulb"></div>
+      <div class="xmas-bulb"></div><div class="xmas-bulb"></div>
+    </div>
+    <p class="xmas-code">// SEÑAL ACTIVA — UPSIDE DOWN //</p>
+  </div>
+  <div class="sobre-content reveal">
+    <div class="section-tag">Expediente #FDD-2026</div>
+    <h2>El Incidente<br>de Hawkins</h2>
+    <p class="sobre-text">Una vez al año, el portal interdimensional se rasga y Hawkins deja de ser solo una ciudad de Indiana. La Fiesta de Disfraces FDD convoca a los más valientes a cruzar al otro lado — donde la música suena diferente, los disfraces cobran vida, y los premios esperan a los que se animen.</p>
+    <p class="sobre-text">Luces de navidad que parpadean, neón ochentoso, y la atmósfera del Upside Down envuelven cada rincón. Una noche donde la realidad y la ficción se fusionan en una experiencia cinematográfica única.</p>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <span class="stat-num">+5000</span>
+        <span class="stat-label">Agentes por año</span>
+      </div>
+      <div class="stat-card reveal">
+        <span class="stat-num">10</span>
+        <span class="stat-label">Ediciones</span>
+      </div>
+      <div class="stat-card reveal">
+        <span class="stat-num">1</span>
+        <span class="stat-label">Noche épica</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PRIZES ========== -->
+<section id="premios">
+  <div class="section-tag">Misiones del Upside Down</div>
+  <h2 class="section-title reveal glitch-text" data-text="PREMIOS EN JUEGO">PREMIOS EN JUEGO</h2>
+  <div class="premios-grid">
+    <div class="premio-card card gold reveal">
+      <div class="premio-icon">👑</div>
+      <div class="premio-villain">Nivel: Vecna</div>
+      <div class="premio-rank">1er Premio</div>
+      <div class="premio-prize" style="letter-spacing:.3em">✨ A REVELAR ✨</div>
+      <div class="premio-desc">El agente más poderoso del Upside Down. Disfraz más impactante de la noche.</div>
+    </div>
+    <div class="premio-card card silver reveal">
+      <div class="premio-icon">🌀</div>
+      <div class="premio-villain">Nivel: Mind Flayer</div>
+      <div class="premio-rank">2do Premio</div>
+      <div class="premio-prize" style="letter-spacing:.3em">✨ A REVELAR ✨</div>
+      <div class="premio-desc">La mente que controla todo. Segundo mejor disfraz de la velada.</div>
+    </div>
+    <div class="premio-card card bronze reveal">
+      <div class="premio-icon">🦇</div>
+      <div class="premio-villain">Nivel: Demobat</div>
+      <div class="premio-rank">3er Premio</div>
+      <div class="premio-prize" style="letter-spacing:.3em">✨ A REVELAR ✨</div>
+      <div class="premio-desc">Criatura de las sombras. Tercer lugar en el ranking dimensional.</div>
+    </div>
+  </div>
+  <div class="premio-extra reveal">
+    ⚡ BONUS HAWKINS · Premios sorpresa para los mejores en cada categoría · El jurado decide en base a creatividad, impacto y detalle ⚡
+  </div>
+</section>
+
+<!-- ========== CATEGORIES ========== -->
+<section id="categorias">
+  <div class="section-tag">Personajes Detectados</div>
+  <h2 class="section-title reveal">CATEGORÍAS<br>DE DISFRAZ</h2>
+  <div class="cat-grid">
+    <div class="cat-card reveal"><div class="cat-icon">👹</div><div class="cat-name">Terror & Horror</div><div class="cat-hint">Monstruos, villanos, criaturas</div></div>
+    <div class="cat-card reveal"><div class="cat-icon">🔮</div><div class="cat-name">Sobrenatural</div><div class="cat-hint">Brujas, fantasmas, poderes</div></div>
+    <div class="cat-card reveal"><div class="cat-icon">🎬</div><div class="cat-name">Cine & Series</div><div class="cat-hint">Personajes icónicos de pantalla</div></div>
+    <div class="cat-card reveal"><div class="cat-icon">📼</div><div class="cat-name">Años 80</div><div class="cat-hint">Retro, vintage, ochentoso</div></div>
+    <div class="cat-card reveal"><div class="cat-icon">👫</div><div class="cat-name">Duo / Grupo</div><div class="cat-hint">Mejor conjunto coordinado</div></div>
+    <div class="cat-card reveal"><div class="cat-icon">🛸</div><div class="cat-name">Sci-Fi</div><div class="cat-hint">Ciencia ficción y espacio</div></div>
+    <div class="cat-card reveal"><div class="cat-icon">🧟</div><div class="cat-name">Zombie / Gore</div><div class="cat-hint">Efectos especiales y maquillaje</div></div>
+    <div class="cat-card reveal"><div class="cat-icon">✨</div><div class="cat-name">Creatividad</div><div class="cat-hint">Categoría libre, sin límites</div></div>
+  </div>
+</section>
+
+<!-- ========== TICKETS ========== -->
+<section id="entradas" aria-labelledby="tickets-title">
+  <div class="section-tag">Acceso Clasificado</div>
+  <h2 id="tickets-title" class="section-title reveal">PREVENTA<br>DE ENTRADAS</h2>
+  <div class="entradas-box reveal" style="background: transparent; border: none; padding: 0;">
+    <div class="ticket-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;">
+      <article class="ticket-card" style="width: 300px; display: flex; flex-direction: column; background: rgba(196,30,58,.04); border: 1px solid rgba(196,30,58,.28); padding: 28px 18px;">
+        <h3 style="font-family:'Special Elite',cursive; color: #fff; font-size: 1.1rem; margin-bottom: 10px;">Fase 1: Sujetos de Prueba</h3>
+        <div class="ticket-price" style="font-family:'Cinzel Decorative',serif; font-size:1.8rem; font-weight:900; color:var(--red); margin-bottom:12px;">$15.000</div>
+        <p class="ticket-desc" style="font-family:'Special Elite',cursive; font-size:.72rem; color:var(--text-dim); margin-bottom: 20px; flex-grow: 1;">Acceso general al evento. Stock limitado para los primeros valientes.</p>
+        <a href="https://wa.me/5493855789996?text=Hola,%20quiero%20comprar%20una%20entrada%20Fase%201" target="_blank" class="btn-buy" style="background:var(--neon-red); color:#fff; padding:10px; text-decoration:none; display:block; font-family:'Special Elite',cursive; font-size:.85rem; border-radius:4px;">Comprar</a>
+      </article>
+      <article class="ticket-card" style="width: 300px; display: flex; flex-direction: column; background: rgba(196,30,58,.04); border: 1px solid rgba(196,30,58,.28); padding: 28px 18px;">
+        <h3 style="font-family:'Special Elite',cursive; color: #fff; font-size: 1.1rem; margin-bottom: 10px;">Fase 2: Residentes de Hawkins</h3>
+        <div class="ticket-price" style="font-family:'Cinzel Decorative',serif; font-size:1.8rem; font-weight:900; color:var(--red); margin-bottom:12px;">$20.000</div>
+        <p class="ticket-desc" style="font-family:'Special Elite',cursive; font-size:.72rem; color:var(--text-dim); margin-bottom: 20px; flex-grow: 1;">Acceso general. Venta regular una vez agotada la Fase 1.</p>
+        <a href="#" class="btn-buy" style="background:#555; pointer-events:none; color:#fff; padding:10px; text-decoration:none; display:block; font-family:'Special Elite',cursive; font-size:.85rem; border-radius:4px;">Próximamente</a>
+      </article>
+      <article class="ticket-card" style="width: 300px; display: flex; flex-direction: column; background: rgba(196,30,58,.04); border: 1px solid rgba(196,30,58,.28); padding: 28px 18px;">
+        <h3 style="font-family:'Special Elite',cursive; color: #fff; font-size: 1.1rem; margin-bottom: 10px;">Pase Hellfire Club (VIP)</h3>
+        <div class="ticket-price" style="font-family:'Cinzel Decorative',serif; font-size:1.8rem; font-weight:900; color:var(--red); margin-bottom:12px;">$40.000</div>
+        <p class="ticket-desc" style="font-family:'Special Elite',cursive; font-size:.72rem; color:var(--text-dim); margin-bottom: 20px; flex-grow: 1;">Ingreso sin fila, sector exclusivo con barra propia, baños VIP y vista preferencial.</p>
+        <a href="https://wa.me/5493855789996?text=Hola,%20quiero%20comprar%20un%20Pase%20VIP" target="_blank" class="btn-buy" style="background:var(--neon-red); color:#fff; padding:10px; text-decoration:none; display:block; font-family:'Special Elite',cursive; font-size:.85rem; border-radius:4px;">Comprar VIP</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== GALLERY ========== -->
+<section id="galeria">
+  <div class="section-tag">Archivos del Laboratorio</div>
+  <h2 class="section-title reveal">📸 REGISTROS<br>DE EDICIONES ANTERIORES</h2>
+  <span class="galeria-tag">// MATERIAL CLASIFICADO — DOCUMENTO INTERNO FDD //</span>
+  <div class="galeria-grid">
+    <div class="galeria-item reveal" onclick="openLightbox(0)"><img src="fotos/26102019-0L4A3971.jpg" alt="FDD foto 1" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(1)"><img src="fotos/26102019-IMG_3886.jpg" alt="FDD foto 2" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(2)"><img src="fotos/26102019-IMG_3959.jpg" alt="FDD foto 3" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(3)"><img src="fotos/26102019-IMG_3965.jpg" alt="FDD foto 4" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(4)"><img src="fotos/26102019-IMG_3968.jpg" alt="FDD foto 5" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(5)"><img src="fotos/26102019-IMG_3971.jpg" alt="FDD foto 6" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(6)"><img src="fotos/26102019-IMG_4000.jpg" alt="FDD foto 7" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(7)"><img src="fotos/26102019-IMG_4022.jpg" alt="FDD foto 8" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(8)"><img src="fotos/26102019-IMG_4034.jpg" alt="FDD foto 9" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(9)"><img src="fotos/26102019-IMG_4095.jpg" alt="FDD foto 10" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(10)"><img src="fotos/26102019-IMG_4122.jpg" alt="FDD foto 11" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(11)"><img src="fotos/26102019-IMG_4144.jpg" alt="FDD foto 12" loading="lazy"></div>
+    <div class="galeria-item reveal" onclick="openLightbox(12)"><img src="fotos/26102019-IMG_4171.jpg" alt="FDD foto 13" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightboxOutside(event)">
+  <button id="lb-close" onclick="closeLightbox()">✕</button>
+  <button id="lb-prev" onclick="lightboxNav(-1)">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next" onclick="lightboxNav(1)">›</button>
+</div>
+
+<!-- ========== REGISTRO ========== -->
+<section id="registro">
+  <div class="section-tag">Centro de Reclutamiento</div>
+  <h2 class="section-title reveal">REGISTRO<br>DE AGENTES</h2>
+  <div class="registro-box reveal">
+    <form id="fdd-form">
+      <div class="form-row">
+        <div class="form-group"><label>Nombre del Agente</label><input type="text" placeholder="Tu nombre completo" required></div>
+        <div class="form-group"><label>Correo Interdimensional</label><input type="email" placeholder="tu@email.com" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Teléfono de Contacto</label><input type="tel" placeholder="+54 XXX XXX XXXX"></div>
+        <div class="form-group">
+          <label>Categoría de Misión</label>
+          <select>
+            <option value="">Seleccionar categoría...</option>
+            <option>Terror & Horror</option><option>Sobrenatural</option>
+            <option>Cine & Series</option><option>Años 80</option>
+            <option>Duo / Grupo</option><option>Sci-Fi</option>
+            <option>Zombie / Gore</option><option>Creatividad Libre</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Concepto del Disfraz (opcional)</label><textarea placeholder="Describí brevemente tu disfraz..." rows="3"></textarea></div>
+      <button type="submit" class="btn-red" style="width:100%;padding:16px;font-size:.9rem">⚡ CONFIRMAR MISIÓN</button>
+    </form>
+    <div id="success-msg">✅ AGENTE REGISTRADO EXITOSAMENTE<br><br>Tu identidad ha sido ingresada en los archivos de Hawkins Lab.<br>Recibirás instrucciones antes del 31 de octubre.</div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <img class="footer-logo" src="logo-st.png" alt="FDD">
+  <div class="footer-title">FIESTA DE DISFRACES 2026</div>
+  <div class="footer-sub">🦇 Hawkins Edition · El portal se abre cada Halloween 🎃</div>
+  <div class="footer-classified">LABORATORIO HAWKINS — DOCUMENTO CLASIFICADO — NIVEL 5 — DISTRIBUCIÓN RESTRINGIDA</div>
+  <div class="footer-dev">Desarrollado por <span>Fusión IA - Fuego Creativo</span></div>
+</footer>
+
+<!-- ========== WHATSAPP ========== -->
+<a href="https://wa.me/5493855789996" class="whatsapp-float" target="_blank" aria-label="Asistente de WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+  </svg>
+</a>
+
+<!-- ========== MODAL ========== -->
+<div id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-icon">🌀</div>
+    <h3 class="modal-title">Portal en Activación</h3>
+    <p class="modal-text">La venta de entradas para la Fiesta de Disfraces 2026 se habilitará próximamente.<br><br>El portal está calibrando sus coordenadas. Contactanos por WhatsApp para preventa exclusiva y novedades del evento.</p>
+    <button class="modal-wa" onclick="window.open('https://api.whatsapp.com/send?phone=543855789996&text=Hola!%20Quiero%20info%20sobre%20entradas%20para%20la%20FDD%202026','_blank')">
+      <svg style="width:22px;height:22px;fill:#fff;flex-shrink:0" viewBox="0 0 32 32"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.738 5.494 2.027 7.807L.054 31.946l8.344-1.958A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0z"/></svg>
+      CONSULTAR POR WHATSAPP
+    </button>
+  </div>
+</div>
+
+<script src="js/main.js" defer></script>
 </body>
 </html>

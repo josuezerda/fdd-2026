@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programa Embajadores · FDD 2026</title>
+  <meta name="description" content="Propuesta exclusiva para Embajadores de la Fiesta de Disfraces 2026.">
+  <link rel="icon" type="image/png" href="logo-st.png">
+  <link rel="apple-touch-icon" href="logo-st.png">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Estilos adicionales específicos para presupuestos */
+    .proposal-hero { min-height: 60vh; padding-top: 120px; }
+    .proposal-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 40px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 800px;
+    }
+    .proposal-card.gold-tier {
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      background: rgba(10, 5, 0, 0.8);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+    }
+    .proposal-card h3 { color: var(--blue); margin-bottom: 20px; font-size: 1.8rem; }
+    .proposal-card.gold-tier h3 { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+    .proposal-list { list-style: none; text-align: left; }
+    .proposal-list li { margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5; display: flex; align-items: flex-start; gap: 10px; }
+    .proposal-list li::before { content: '►'; color: var(--neon-red); font-size: 0.9rem; margin-top: 4px; }
+    .proposal-card.gold-tier .proposal-list li::before { color: #ffd700; }
+    .investment-box { border: 2px solid #ffd700; background: rgba(255, 215, 0, 0.05); text-align: center; }
+    .investment-box h3 { color: #ffd700; }
+    .badge-limit { display: inline-block; background: var(--neon-red); color: #fff; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; margin-top: 10px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+  </style>
+</head>
+<body>
+  <!-- EFECTOS DE FONDO -->
+  <div id="particles" aria-hidden="true"></div>
+  <div class="scanline" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div id="lightning" aria-hidden="true"><div id="lglow"></div></div>
+
+  <!-- NAVEGACIÓN -->
+  <nav class="navbar" aria-label="Navegación principal">
+    <ul>
+      <li><a href="index.html">Volver al Sitio</a></li>
+      <li><a href="#tecnologia">Tech Value</a></li>
+      <li><a href="#beneficios">Branding</a></li>
+      <li><a href="#inversion">Inversión</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero proposal-hero center" aria-labelledby="hero-title">
+      <img class="logo-img" src="logo-st.png" alt="Fiesta de Disfraces 2026 Logo" style="width: 200px;">
+      <h1 id="hero-title" class="section-title" style="margin-bottom: 10px;">Programa Embajadores Oficiales</h1>
+      <div class="classified" aria-hidden="true" style="border-color: #ffd700; color: #ffd700;">Alta Clasificación — Tech Partner</div>
+      <div class="badge-limit">Cupo Limitado: Sólo 6 Marcas</div>
+    </section>
+
+    <!-- PROPUESTA SECTION -->
+    <section id="tecnologia">
+      <div class="proposal-card gold-tier">
+        <h3>Más allá del Branding: Innovación Tecnológica</h3>
+        <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.6;">Sabemos que los logos se olvidan, pero la tecnología transforma negocios. Nuestro programa de Embajadores no solo hace que tu marca brille en la fiesta, sino que te regala un salto tecnológico real para tu empresa, desarrollado por nuestro equipo especializado.</p>
+        
+        <h3 style="margin-top: 40px;">Beneficios Tecnológicos Exclusivos</h3>
+        <ul class="proposal-list">
+          <li><strong>Tu Propio Asistente de IA (Bot de WhatsApp):</strong> Desarrollamos y desplegamos un Asistente Virtual Inteligente exclusivamente entrenado con la información de TU empresa. Estará operativo gratis por 3 meses para automatizar tus ventas, responder dudas de clientes 24/7 y revolucionar tu atención al cliente.</li>
+          <li><strong>Integración "Upside Down" en la FDD:</strong> Tu marca tendrá una integración nativa en el Bot Oficial de la Fiesta de Disfraces. Por ejemplo, los asistentes podrán escribir "Beneficio [Tu Marca]" y el bot oficial les entregará descuentos, promocionando tu negocio de forma conversacional masiva.</li>
+          <li><strong>Dashboard Analítico Privado:</strong> Obtén acceso a un panel de métricas en tiempo real. Podrás visualizar con gráficos interactivos cuánta gente interactuó con tu marca en el bot oficial, escaneó tus códigos QR en el evento y evaluar tu Retorno de Inversión (ROI) en vivo.</li>
+          <li><strong>Consultoría & Modernización (CRM Ligero):</strong> Te ayudamos a modernizar tu central de comunicación. Si lo deseas, integramos tu nuevo asistente de IA con herramientas de gestión de clientes (CRM) para que tu equipo comercial escale sus operaciones.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="beneficios">
+      <div class="proposal-card">
+        <h3>Beneficios de Branding Nivel Premium</h3>
+        <ul class="proposal-list">
+          <li><strong>Presencia Máxima (Main Sponsor):</strong> Tu marca ocupará los espacios más privilegiados del evento. Mención de "Presentado por..." en pantallas principales y sector exclusivo de VIP.</li>
+          <li><strong>Dominio Digital:</strong> Colaboración en Instagram (Posts fijados) asegurando el máximo alcance, presencia destacada en la web oficial y en toda la comunicación de prensa.</li>
+          <li><strong>Experiencia Hellfire Club VIP:</strong> 25 Pases VIP de cortesía para invitar a tus mejores clientes o directivos a vivir la fiesta desde la mejor ubicación y con atención personalizada.</li>
+        </ul>
+      </div>
+
+      <div class="proposal-card gold-tier investment-box" id="inversion">
+        <h3>Propuesta a Medida</h3>
+        <p style="font-size: 1.2rem; margin-bottom: 20px;">Una alianza estratégica que potencia la FDD y revoluciona la tecnología de tu empresa.</p>
+        <p style="font-size: 2rem; color: #fff; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); font-weight: bold; margin-bottom: 30px;">Agendar Reunión Privada</p>
+        <a href="https://wa.me/5493855789996?text=Hola,%20me%20interesa%20postularme%20para%20uno%20de%20los%206%20cupos%20de%20Embajador%20FDD" target="_blank" class="btn-buy" style="background: linear-gradient(45deg, #ffd700, #ff8c00); color: #000;" aria-label="Contactar por WhatsApp">Postular mi Marca</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>Fiesta de Disfraces 2026 · Documento Comercial Confidencial</div>
+    <div>Desarrollado por <span>Fusión IA - Fuego Creativo</span></div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta de Auspicio · FDD 2026</title>
+  <meta name="description" content="Súmate como auspiciante a la Fiesta de Disfraces 2026 - Hawkins Edition.">
+  <link rel="icon" type="image/png" href="logo-st.png">
+  <link rel="apple-touch-icon" href="logo-st.png">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Estilos adicionales específicos para presupuestos */
+    .proposal-hero { min-height: 60vh; padding-top: 120px; }
+    .proposal-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 40px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 800px;
+    }
+    .proposal-card h3 { color: var(--blue); margin-bottom: 20px; font-size: 1.8rem; }
+    .proposal-list { list-style: none; text-align: left; }
+    .proposal-list li { margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5; display: flex; align-items: flex-start; gap: 10px; }
+    .proposal-list li::before { content: '►'; color: var(--neon-red); font-size: 0.9rem; margin-top: 4px; }
+    .investment-box { border: 2px solid var(--neon-red); background: rgba(196, 30, 58, 0.1); text-align: center; }
+    .investment-box h3 { color: var(--neon-red); }
+  </style>
+</head>
+<body>
+  <!-- EFECTOS DE FONDO -->
+  <div id="particles" aria-hidden="true"></div>
+  <div class="scanline" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div id="lightning" aria-hidden="true"><div id="lglow"></div></div>
+
+  <!-- NAVEGACIÓN -->
+  <nav class="navbar" aria-label="Navegación principal">
+    <ul>
+      <li><a href="index.html">Volver al Sitio</a></li>
+      <li><a href="#beneficios">Beneficios</a></li>
+      <li><a href="#inversion">Inversión</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero proposal-hero center" aria-labelledby="hero-title">
+      <img class="logo-img" src="logo-st.png" alt="Fiesta de Disfraces 2026 Logo" style="width: 200px;">
+      <h1 id="hero-title" class="section-title" style="margin-bottom: 10px;">Propuesta de Auspicio Comercial</h1>
+      <div class="classified" aria-hidden="true">Nivel: Estándar — Hawkins Lab</div>
+    </section>
+
+    <!-- PROPUESTA SECTION -->
+    <section id="beneficios">
+      <div class="proposal-card">
+        <h3>¿Por qué ser parte?</h3>
+        <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.6;">La Fiesta de Disfraces de Santiago del Estero es el evento más esperado del año. Asociar tu marca a nuestra edición <strong>Hawkins</strong> garantiza un impacto directo en un público joven, dinámico y altamente activo en redes sociales.</p>
+        
+        <h3 style="margin-top: 40px;">Beneficios Incluidos</h3>
+        <ul class="proposal-list">
+          <li><strong>Presencia Visual Estratégica:</strong> Tu logo en las pantallas gigantes del main stage, banners perimetrales y sector de photo-opportunity.</li>
+          <li><strong>Impacto Digital:</strong> Menciones oficiales en nuestras redes sociales (Instagram/TikTok), presencia del logo en nuestra página web interactiva oficial y en los flyers digitales masivos.</li>
+          <li><strong>Activación BTL:</strong> Un espacio físico asignado dentro del predio para que tu marca interactúe directamente con el público (juegos, reparto de merchandising o degustaciones).</li>
+          <li><strong>Experiencia VIP:</strong> Entrega de 10 Pases VIP (Hellfire Club) para directivos, clientes especiales o para sortear en tus redes, brindando acceso rápido y beneficios exclusivos.</li>
+        </ul>
+      </div>
+
+      <div class="proposal-card investment-box" id="inversion">
+        <h3>Inversión y Retorno</h3>
+        <p style="font-size: 1.2rem; margin-bottom: 20px;">Asegura la presencia de tu marca en el evento que marcará el año.</p>
+        <p style="font-size: 2rem; color: #fff; text-shadow: 0 0 10px rgba(255, 20, 66, 0.5); font-weight: bold; margin-bottom: 30px;">Consultar Cotización</p>
+        <a href="https://wa.me/5493855789996?text=Hola,%20me%20interesa%20la%20propuesta%20de%20auspicio%20estándar%20para%20la%20FDD" target="_blank" class="btn-buy" aria-label="Contactar por WhatsApp">Contactar a Producción</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>Fiesta de Disfraces 2026 · Documento Comercial Confidencial</div>
+    <div>Desarrollado por <span>Fusión IA - Fuego Creativo</span></div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

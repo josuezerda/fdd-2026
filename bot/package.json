@@ -10,13 +10,16 @@
     "build": "npx rollup -c"
   },
   "dependencies": {
+    "@builderbot-plugins/langchain": "1.0.0-alpha.0",
     "@builderbot/bot": "1.2.2",
     "@builderbot/provider-meta": "1.2.2",
-    "@builderbot-plugins/langchain": "1.0.0-alpha.0",
+    "@supabase/supabase-js": "^2.110.0",
+    "axios": "^1.7.9",
+    "cors": "^2.8.6",
     "dotenv": "^16.4.7",
+    "express": "^5.2.1",
     "mongoose": "^8.8.4",
-    "openai": "^4.77.0",
-    "axios": "^1.7.9"
+    "openai": "^4.77.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
