@@ -252,10 +252,10 @@ function updateCD(){
   const diff=target-new Date();
   if(diff<=0){document.querySelectorAll('.cd-num').forEach(e=>e.textContent='00');return;}
   const d=Math.floor(diff/864e5),h=Math.floor((diff%864e5)/36e5),m=Math.floor((diff%36e5)/6e4),s=Math.floor((diff%6e4)/1e3);
-  document.getElementById('cd-days').textContent='PR';
-  document.getElementById('cd-hours').textContent='OX';
-  document.getElementById('cd-mins').textContent='IM';
-  document.getElementById('cd-secs').textContent='A!';
+  document.getElementById('cd-days').textContent=d.toString().padStart(2,'0');
+  document.getElementById('cd-hours').textContent=h.toString().padStart(2,'0');
+  document.getElementById('cd-mins').textContent=m.toString().padStart(2,'0');
+  document.getElementById('cd-secs').textContent=s.toString().padStart(2,'0');
 }
 updateCD(); setInterval(updateCD,1000);
 
