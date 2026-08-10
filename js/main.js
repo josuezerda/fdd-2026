@@ -246,16 +246,44 @@ document.addEventListener('click',e=>{
   if(m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)) closeMenu();
 });
 
-// ======= COUNTDOWN — 7 Nov 2026 22:00 =======
-const target=new Date('2026-11-07T22:00:00'); // Mantenemos la fecha para lógica futura
+// ======= COUNTDOWNS =======
+const target = new Date('2026-11-07T22:00:00');
+const targetPreventa = new Date('2026-09-12T00:00:00');
+const targetOficial = new Date('2026-09-21T00:00:00');
+
 function updateCD(){
-  const diff=target-new Date();
-  if(diff<=0){document.querySelectorAll('.cd-num').forEach(e=>e.textContent='00');return;}
-  const d=Math.floor(diff/864e5),h=Math.floor((diff%864e5)/36e5),m=Math.floor((diff%36e5)/6e4),s=Math.floor((diff%6e4)/1e3);
-  document.getElementById('cd-days').textContent=d.toString().padStart(2,'0');
-  document.getElementById('cd-hours').textContent=h.toString().padStart(2,'0');
-  document.getElementById('cd-mins').textContent=m.toString().padStart(2,'0');
-  document.getElementById('cd-secs').textContent=s.toString().padStart(2,'0');
+  const now = new Date();
+  
+  const diff = target - now;
+  if(diff <= 0){
+    document.querySelectorAll('.cd-num').forEach(e=>e.textContent='00');
+  } else {
+    const d=Math.floor(diff/864e5),h=Math.floor((diff%864e5)/36e5),m=Math.floor((diff%36e5)/6e4),s=Math.floor((diff%6e4)/1e3);
+    document.getElementById('cd-days').textContent=d.toString().padStart(2,'0');
+    document.getElementById('cd-hours').textContent=h.toString().padStart(2,'0');
+    document.getElementById('cd-mins').textContent=m.toString().padStart(2,'0');
+    document.getElementById('cd-secs').textContent=s.toString().padStart(2,'0');
+  }
+
+  const pDiff = targetPreventa - now;
+  const elPreventa = document.getElementById('cd-preventa');
+  if(elPreventa) {
+    if(pDiff <= 0) elPreventa.textContent = "HABILITADO";
+    else {
+      const pd=Math.floor(pDiff/864e5), ph=Math.floor((pDiff%864e5)/36e5), pm=Math.floor((pDiff%36e5)/6e4), ps=Math.floor((pDiff%6e4)/1e3);
+      elPreventa.textContent = `Faltan: ${pd}d ${ph.toString().padStart(2,'0')}h ${pm.toString().padStart(2,'0')}m ${ps.toString().padStart(2,'0')}s`;
+    }
+  }
+
+  const oDiff = targetOficial - now;
+  const elOficial = document.getElementById('cd-oficial');
+  if(elOficial) {
+    if(oDiff <= 0) elOficial.textContent = "HABILITADO";
+    else {
+      const od=Math.floor(oDiff/864e5), oh=Math.floor((oDiff%864e5)/36e5), om=Math.floor((oDiff%36e5)/6e4), os=Math.floor((oDiff%6e4)/1e3);
+      elOficial.textContent = `Faltan: ${od}d ${oh.toString().padStart(2,'0')}h ${om.toString().padStart(2,'0')}m ${os.toString().padStart(2,'0')}s`;
+    }
+  }
 }
 updateCD(); setInterval(updateCD,1000);
 
