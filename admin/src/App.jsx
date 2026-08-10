@@ -193,7 +193,7 @@ function App() {
         <div className="bg-surface p-10 rounded-xl shadow-lg border border-border w-[400px]">
           <div className="text-center mb-8">
             <ShieldAlert className="text-primary mx-auto mb-4" size={48} />
-            <h1 className="text-2xl font-bold text-textMain font-[Cinzel_Decorative]">Hawkins Admin</h1>
+            <h1 className="text-2xl font-bold text-textMain font-[Cinzel_Decorative]">Fernández Admin</h1>
             <p className="text-sm text-textMuted mt-2 uppercase tracking-widest font-[Special_Elite]">Portal de Seguridad</p>
           </div>
           <form onSubmit={handleLogin} className="space-y-6">
@@ -237,7 +237,7 @@ function App() {
         <div className="p-6 border-b border-border">
           <h1 className="text-xl font-bold text-textMain flex items-center gap-2 font-[Cinzel_Decorative]">
             <ShieldAlert className="text-primary" />
-            Hawkins Admin
+            Fernández Admin
           </h1>
           <p className="text-xs text-primary mt-1 tracking-widest font-[Special_Elite] uppercase">Nivel 5 Clasificado</p>
         </div>

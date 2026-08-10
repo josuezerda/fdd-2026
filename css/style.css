@@ -187,7 +187,7 @@ section{padding:90px 40px;position:relative;overflow:hidden}
 /* ============ TICKETS ============ */
 #entradas{text-align:center}
 .entradas-box{max-width:920px;margin:0 auto;border:1px solid var(--border);background:var(--card);padding:48px 40px;position:relative}
-.entradas-box::before{content:'DOCUMENTO CLASIFICADO — LABORATORIO HAWKINS';position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:'Special Elite',cursive;font-size:.55rem;color:rgba(196,30,58,.3);letter-spacing:.2em;white-space:nowrap}
+.entradas-box::before{content:'DOCUMENTO CLASIFICADO — CONTROL DE RIESGOS';position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:'Special Elite',cursive;font-size:.55rem;color:rgba(196,30,58,.3);letter-spacing:.2em;white-space:nowrap}
 .ticket-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
 .ticket-card{border:1px solid var(--border);background:rgba(196,30,58,.04);padding:28px 18px;text-align:center;position:relative;overflow:hidden}
 .ticket-type{font-family:'Special Elite',cursive;font-size:.65rem;color:var(--text-dim);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}

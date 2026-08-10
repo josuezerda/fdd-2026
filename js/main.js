@@ -73,11 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ======= TYPEWRITER STORY =======
-const storyFull = `Bajo las calles más antiguas de Argentina, en Santiago del Estero — la Madre de Ciudades — existe una red de túneles que nadie termina de mapear. Los colonizadores los construyeron en 1553. Dicen que van más allá de la Plaza Libertad, que serpentean bajo el Río Dulce, que sus paredes respiran.
+const storyFull = `1986. En las afueras de Fernández, junto a las vías del viejo ferrocarril, operaba la envasadora de tomates más grande de la región. Una noche, una fuerte explosión sacudió las calderas. Oficialmente, un accidente industrial.
 
-En octubre de 2025, los sismógrafos de la universidad detectaron vibraciones a 18 metros de profundidad. No eran temblores. Era algo que pulsaba. Como un corazón.
+Pero los lugareños saben la verdad: lo que tiñó de rojo la tierra esa noche no fue salsa de tomate... fue la apertura de una grieta hacia algo oscuro.
 
-La grieta se abrió el 31 de octubre. El Upside Down encontró su portal en el subsuelo santiagueño. Ahora tú tienes la oportunidad de cruzar.`;
+Durante años, la fábrica estuvo sellada. Hasta hoy. El sello se rompió. La sirena de la vieja envasadora volvió a sonar. Estás a punto de entrar a la zona de exclusión.`;
 
 let storyIndex = 0;
 const storyEl = document.getElementById('story-text');
