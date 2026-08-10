@@ -246,8 +246,8 @@ document.addEventListener('click',e=>{
   if(m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)) closeMenu();
 });
 
-// ======= COUNTDOWN — 31 Oct 2026 22:00 =======
-const target=new Date('2026-10-31T22:00:00'); // Mantenemos la fecha para lógica futura
+// ======= COUNTDOWN — 7 Nov 2026 22:00 =======
+const target=new Date('2026-11-07T22:00:00'); // Mantenemos la fecha para lógica futura
 function updateCD(){
   const diff=target-new Date();
   if(diff<=0){document.querySelectorAll('.cd-num').forEach(e=>e.textContent='00');return;}
