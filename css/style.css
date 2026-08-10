@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Stranger Back';
+  src: url('../tipografias/Stranger back in the Night.ttf') format('truetype');
+}
+
 /* ============ VARIABLES ============ */
 :root{
   --black:#020005;--dark:#08000d;--mid:#0f0018;--card:rgba(12,0,22,0.88);

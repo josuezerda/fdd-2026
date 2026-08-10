@@ -235,51 +235,25 @@
   </div>
 </section>
 
-<!-- ========== GALLERY ========== -->
-<section id="galeria">
-  <div class="section-tag">Archivos del Laboratorio</div>
-  <h2 class="section-title reveal">📸 REGISTROS<br>DE EDICIONES ANTERIORES</h2>
-  <span class="galeria-tag">// MATERIAL CLASIFICADO — DOCUMENTO INTERNO FDD //</span>
-  <div class="galeria-grid" id="galeria-grid">
-    <!-- Las imágenes se cargarán dinámicamente desde Supabase -->
+<!-- ========== GALLERY / INSTAGRAM ========== -->
+<section id="galeria" style="display:flex; flex-wrap:wrap; gap:40px; align-items:center; max-width:1200px; margin:0 auto; padding:60px 20px;">
+  <!-- Left Column: Instagram -->
+  <div style="flex:1; min-width:300px; text-align:center;">
+    <h2 style="font-family:'Stranger Back', sans-serif; font-size:3.5rem; color:var(--red); margin-bottom:20px; text-shadow:0 0 15px rgba(196,30,58,0.6); line-height:1.2;">Seguinos en Instagram</h2>
+    <p style="font-family:'Special Elite',cursive; color:var(--text-dim); margin-bottom:30px; font-size:1.1rem; line-height:1.6;">Enterate de todas las novedades, preventas y preparativos para la gran noche en Club Sportivo Fernández.</p>
+    <a href="https://www.instagram.com/fiestadedisfracesfdz" target="_blank" style="display:inline-block; padding:15px 30px; background:linear-gradient(135deg,#c41e3a,#8b0000); color:#fff; text-decoration:none; font-family:'Special Elite',cursive; font-size:1.2rem; border-radius:8px; box-shadow:0 0 20px rgba(196,30,58,0.5); transition:transform 0.3s ease;">@fiestadedisfracesfdz</a>
   </div>
-</section>
-
-<!-- Lightbox -->
-<div id="lightbox" onclick="closeLightboxOutside(event)">
-  <button id="lb-close" onclick="closeLightbox()">✕</button>
-  <button id="lb-prev" onclick="lightboxNav(-1)">‹</button>
-  <img id="lb-img" src="" alt="">
-  <button id="lb-next" onclick="lightboxNav(1)">›</button>
-</div>
-
-<!-- ========== REGISTRO ========== -->
-<section id="registro">
-  <div class="section-tag">Centro de Reclutamiento</div>
-  <h2 class="section-title reveal">REGISTRO<br>DE AGENTES</h2>
-  <div class="registro-box reveal">
-    <form id="fdd-form">
-      <div class="form-row">
-        <div class="form-group"><label>Nombre del Agente</label><input type="text" placeholder="Tu nombre completo" required></div>
-        <div class="form-group"><label>Correo Interdimensional</label><input type="email" placeholder="tu@email.com" required></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Teléfono de Contacto</label><input type="tel" placeholder="+54 XXX XXX XXXX"></div>
-        <div class="form-group">
-          <label>Categoría de Misión</label>
-          <select>
-            <option value="">Seleccionar categoría...</option>
-            <option>Terror & Horror</option><option>Sobrenatural</option>
-            <option>Cine & Series</option><option>Años 80</option>
-            <option>Duo / Grupo</option><option>Sci-Fi</option>
-            <option>Zombie / Gore</option><option>Creatividad Libre</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group"><label>Concepto del Disfraz (opcional)</label><textarea placeholder="Describí brevemente tu disfraz..." rows="3"></textarea></div>
-      <button type="submit" class="btn-red" style="width:100%;padding:16px;font-size:.9rem">⚡ CONFIRMAR MISIÓN</button>
-    </form>
-    <div id="success-msg">✅ AGENTE REGISTRADO EXITOSAMENTE<br><br>Tu identidad ha sido ingresada en los archivos de Control de Riesgos.<br>Recibirás instrucciones antes del 7 de noviembre.</div>
+  
+  <!-- Right Column: Fotos -->
+  <div style="flex:2; min-width:300px;">
+    <div class="galeria-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:15px;">
+      <img src="fotos/26102019-IMG_3959.jpg" style="width:100%; border-radius:8px; border:1px solid var(--border);">
+      <img src="fotos/26102019-IMG_3965.jpg" style="width:100%; border-radius:8px; border:1px solid var(--border);">
+      <img src="fotos/26102019-IMG_4000.jpg" style="width:100%; border-radius:8px; border:1px solid var(--border);">
+      <img src="fotos/26102019-IMG_4122.jpg" style="width:100%; border-radius:8px; border:1px solid var(--border);">
+      <img src="fotos/26102019-IMG_4144.jpg" style="width:100%; border-radius:8px; border:1px solid var(--border);">
+      <img src="fotos/26102019-IMG_4171.jpg" style="width:100%; border-radius:8px; border:1px solid var(--border);">
+    </div>
   </div>
 </section>
 
