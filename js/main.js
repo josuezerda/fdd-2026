@@ -318,4 +318,45 @@ document.addEventListener('keydown',e=>{
   }
 });
 
+// ======= GALLERY PHOTO ROTATION =======
+document.addEventListener('DOMContentLoaded', () => {
+  const totalPhotos = 14; // foto1.jpeg to foto14.jpeg
+  const galleryImgs = document.querySelectorAll('.galeria-img');
+  
+  if (galleryImgs.length > 0) {
+    setInterval(() => {
+      // Pick a random image slot from the 8 available
+      const randomSlotIndex = Math.floor(Math.random() * galleryImgs.length);
+      const imgEl = galleryImgs[randomSlotIndex];
+      
+      // Find currently used photo numbers to avoid duplicates
+      const currentSources = Array.from(galleryImgs).map(img => img.src);
+      
+      // Pick a random new photo number (1 to totalPhotos) that is not currently shown
+      let newPhotoNum;
+      let newSrc;
+      let maxAttempts = 20;
+      do {
+        newPhotoNum = Math.floor(Math.random() * totalPhotos) + 1;
+        newSrc = `registrofotos/foto${newPhotoNum}.jpeg`;
+        maxAttempts--;
+      } while (currentSources.some(src => src.includes(newSrc)) && maxAttempts > 0);
+      
+      // Apply fade effect
+      imgEl.style.opacity = '0';
+      imgEl.style.transform = 'scale(0.95)';
+      
+      setTimeout(() => {
+        imgEl.src = newSrc;
+        // Wait for image to load before fading in
+        imgEl.onload = () => {
+          imgEl.style.opacity = '1';
+          imgEl.style.transform = 'scale(1)';
+        };
+      }, 800); // Wait for fade-out transition
+      
+    }, 3000); // Rotate a photo every 3 seconds
+  }
+});
+
 // ======= END OF FILE =======
