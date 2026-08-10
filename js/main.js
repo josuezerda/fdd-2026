@@ -28,18 +28,14 @@ checkBlocker();
 
 // ======= AUDIO — Running Up That Hill · Kate Bush (Stranger Things) =======
 let _musicStarted = false;
+let _ytIframe = null;
+
 function startMusic(){
   if(_musicStarted) return;
   _musicStarted = true;
-  // Crear iframe oculto — se activa automáticamente con el click de INGRESAR
-  const yt = document.createElement('iframe');
-  yt.id = 'yt-music';
-  yt.src = 'https://www.youtube.com/embed/-RcPZdihrp4?autoplay=1&loop=1&playlist=-RcPZdihrp4,NSXA-prVotU&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&start=0';
-  yt.allow = 'autoplay; encrypted-media';
-  yt.setAttribute('allowfullscreen', '');
-  yt.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:-1px;left:-1px;border:none';
-  document.body.appendChild(yt);
-  // Sin botón de música — se activa solo con INGRESAR
+  if(_ytIframe && _ytIframe.contentWindow) {
+    _ytIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+  }
 }
 
 // ======= SPLASH =======
@@ -64,8 +60,17 @@ window.enterSite = function(){
 }
 document.body.style.overflow='hidden';
 
-// Forzar la asociación del evento por las dudas
+// Forzar la asociación del evento por las dudas y precargar iframe para móviles
 document.addEventListener('DOMContentLoaded', () => {
+  // Pre-cargar iframe para que el click inicial en mobile funcione
+  _ytIframe = document.createElement('iframe');
+  _ytIframe.id = 'yt-music';
+  _ytIframe.src = 'https://www.youtube.com/embed/-RcPZdihrp4?enablejsapi=1&loop=1&playlist=-RcPZdihrp4,NSXA-prVotU&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0';
+  _ytIframe.allow = 'autoplay; encrypted-media';
+  _ytIframe.setAttribute('allowfullscreen', '');
+  _ytIframe.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:-1px;left:-1px;border:none';
+  document.body.appendChild(_ytIframe);
+
   const btn = document.getElementById('splash-btn');
   if (btn) {
     btn.addEventListener('click', window.enterSite);
