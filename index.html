@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FDD 2026 — Fiesta de Disfraces · El Incidente de Fernández</title>
 <meta name="description" content="La fiesta de disfraces más inmersiva del año. FDD 2026 — El portal se abre el 7 de noviembre. ¿Te animás a entrar al Upside Down?">
-<link rel="icon" type="image/png" href="logo-st.png">
-<link rel="apple-touch-icon" href="logo-st.png">
+<link rel="icon" type="image/png" href="marcalogo.png">
+<link rel="apple-touch-icon" href="marcalogo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
@@ -16,7 +16,7 @@
 
 <!-- ========== SITE BLOCKER ========== -->
 <div id="site-blocker" style="display:none; position:fixed; inset:0; background:#020005; z-index:99999; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px;">
-  <img src="logo-st.png" alt="FDD" style="width:150px; filter:drop-shadow(0 0 20px #c41e3a); margin-bottom:30px; animation:portal-pulse 3s infinite;">
+  <img src="marcalogo.png" alt="FDD" style="width:150px; filter:drop-shadow(0 0 20px #c41e3a); margin-bottom:30px; animation:portal-pulse 3s infinite;">
   <h1 style="font-family:'Cinzel Decorative', serif; color:#fff; font-size:2rem; text-shadow:0 0 20px #c41e3a; margin-bottom:10px;">PORTAL EN CALIBRACIÓN</h1>
   <p style="font-family:'Special Elite', cursive; color:rgba(220,200,230,0.8); font-size:1rem; letter-spacing:0.1em; max-width:500px; line-height:1.6;">El acceso a la zona de exclusión está temporalmente restringido por Control de Riesgos.<br><br>Volveremos a abrir muy pronto.</p>
 </div>
@@ -33,7 +33,7 @@
         <div class="portal-ring1"></div>
         <div class="portal-ring2"></div>
         <div class="portal-ring3"></div>
-        <img class="portal-logo" src="logo-st.png" alt="FDD 2026">
+        <img class="portal-logo" src="marcalogo.png" alt="FDD 2026">
       </div>
     </div>
     <h1 class="splash-title">FIESTA DE<br>DISFRACES</h1>
@@ -53,7 +53,7 @@
 <!-- ========== NAV ========== -->
 <nav>
   <a href="#hero" class="nav-brand">
-    <img src="logo-st.png" alt="FDD">
+    <img src="marcalogo.png" alt="FDD">
     <div class="nav-brand-text">
       <span class="nav-brand-label">Control de Riesgos</span>
       <span class="nav-brand-name">FDD 2026</span>
@@ -69,7 +69,7 @@
     <li><a href="#registro">Agentes</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:12px">
-    <button class="nav-badge" onclick="openModal()">ACCESO CLASIFICADO</button>
+    <button class="nav-badge" onclick="openModal()">ACCESO VIP</button>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -80,25 +80,28 @@
   <a href="#categorias" onclick="closeMenu()">Personajes</a>
   <a href="#galeria" onclick="closeMenu()">Archivos</a>
   <a href="#registro" onclick="closeMenu()">Agentes</a>
-  <button class="mobile-badge" onclick="closeMenu();openModal()">ACCESO CLASIFICADO</button>
+  <button class="mobile-badge" onclick="closeMenu();openModal()">ACCESO VIP</button>
 </div>
 
 <!-- ========== HERO ========== -->
-<section id="hero">
+<section id="hero" style="position:relative; overflow:hidden;">
   <div class="hero-bg"></div>
   <div id="hero-particles"></div>
   <!-- Rayos rojos -->
   <div class="lightning-container" id="lightning-container">
     <div class="lightning-glow" id="lightning-glow"></div>
   </div>
+  <!-- Watermark Logo -->
+  <img src="marcalogo.png" alt="Marca de agua" style="position:absolute; top:40%; left:50%; transform:translate(-50%, -50%); width:600px; max-width:90%; opacity:0.15; z-index:1; pointer-events:none; filter: grayscale(100%); mix-blend-mode: overlay;">
+  
   <div style="position:relative;z-index:2;text-align:center">
-    <p class="hero-badge reveal">CLUB SPORTIVO FERNÁNDEZ · SÁBADO 7 DE NOVIEMBRE</p>
-    <div class="hero-year reveal">EDICIÓN 2026 - Una extraña edición</div>
-    <h2 class="hero-title reveal glitch-text" data-text="FIESTA DE DISFRACES">FIESTA DE DISFRACES</h2>
+    <p class="hero-badge reveal" style="font-family:'Stranger Back', sans-serif; font-size:1.8rem; color:var(--red); text-shadow: 0 0 10px rgba(196,30,58,0.8); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:15px; border:none; background:none;">CLUB SPORTIVO FERNÁNDEZ · SÁBADO 7 DE NOVIEMBRE</p>
+    <div class="hero-year reveal" style="font-family:'Stranger Back', sans-serif; font-size:2.5rem; margin-bottom:10px;">EDICIÓN 2026 - Una extraña edición</div>
+    <h2 class="hero-title reveal glitch-text" data-text="FIESTA DE DISFRACES" style="font-family:'Stranger Back', sans-serif; font-size:6rem;">FIESTA DE DISFRACES</h2>
     <p class="hero-subtitle reveal">El portal se abre · ¿Entrás a la Fábrica?</p>
     <div class="hero-btns reveal">
       <button class="btn-red" onclick="openModal()">🎟 CONSEGUIR ACCESO</button>
-      <button class="btn-blue" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">📋 REGISTRAR AGENTE</button>
+      <button class="btn-blue" onclick="openModal()">🎟 COMPRAR ENTRADA</button>
     </div>
     <div class="hero-scroll">EXPLORAR</div>
   </div>
@@ -132,7 +135,7 @@
 <section id="sobre">
   <div class="sobre-img-wrap reveal">
     <div class="sobre-img-inner">
-      <img class="sobre-logo" src="logo-st.png" alt="FDD 2026">
+      <img class="sobre-logo" src="marcalogo.png" alt="FDD 2026">
     </div>
     <div class="xmas-lights">
       <div class="xmas-bulb"></div><div class="xmas-bulb"></div><div class="xmas-bulb"></div>
@@ -261,7 +264,7 @@
 
 <!-- ========== FOOTER ========== -->
 <footer>
-  <img class="footer-logo" src="logo-st.png" alt="FDD" style="display:block; margin: 0 auto 20px auto;">
+  <img class="footer-logo" src="marcalogo.png" alt="FDD" style="display:block; margin: 0 auto 20px auto;">
   <div class="footer-title">FIESTA DE DISFRACES 2026</div>
   <div class="footer-sub">🦇 El Incidente de Fernández · El portal se abre una vez al año 🎃</div>
   <div class="footer-classified">CONTROL DE RIESGOS — DOCUMENTO CLASIFICADO — NIVEL 5 — DISTRIBUCIÓN RESTRINGIDA</div>
@@ -280,12 +283,8 @@
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-icon">🌀</div>
-    <h3 class="modal-title">Portal en Activación</h3>
-    <p class="modal-text">La venta de entradas para la Fiesta de Disfraces 2026 se habilitará próximamente.<br><br>El portal está calibrando sus coordenadas. Contactanos por WhatsApp para preventa exclusiva y novedades del evento.</p>
-    <button class="modal-wa" onclick="window.open('https://api.whatsapp.com/send?phone=543855789996&text=Hola!%20Quiero%20info%20sobre%20entradas%20para%20la%20FDD%202026','_blank')">
-      <svg style="width:22px;height:22px;fill:#fff;flex-shrink:0" viewBox="0 0 32 32"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.738 5.494 2.027 7.807L.054 31.946l8.344-1.958A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0z"/></svg>
-      CONSULTAR POR WHATSAPP
-    </button>
+    <h3 class="modal-title" style="font-family:'Stranger Back', sans-serif; font-size:3rem; margin-bottom:20px; color:var(--red);">Comprar Entrada</h3>
+    <p class="modal-text" style="font-size:1.5rem; text-transform:uppercase; letter-spacing:2px; font-weight:bold;">Próximamente</p>
   </div>
 </div>
 
